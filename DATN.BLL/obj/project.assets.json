@@ -1,0 +1,112 @@
+{
+  "version": 3,
+  "targets": {
+    "net6.0": {
+      "DATN.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/DATN.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DATN.Common.dll": {}
+        }
+      },
+      "DATN.DAL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "DATN.Common": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/DATN.DAL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DATN.DAL.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "DATN.Common/1.0.0": {
+      "type": "project",
+      "path": "../DATN.Common/DATN.Common.csproj",
+      "msbuildProject": "../DATN.Common/DATN.Common.csproj"
+    },
+    "DATN.DAL/1.0.0": {
+      "type": "project",
+      "path": "../DATN.DAL/DATN.DAL.csproj",
+      "msbuildProject": "../DATN.DAL/DATN.DAL.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net6.0": [
+      "DATN.Common >= 1.0.0",
+      "DATN.DAL >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\ACER\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "D:\\Documents\\Documents\\Đồ án tốt nghiệp\\DATN\\DATN.NDDUNG.API\\DATN.BLL\\DATN.BLL.csproj",
+      "projectName": "DATN.BLL",
+      "projectPath": "D:\\Documents\\Documents\\Đồ án tốt nghiệp\\DATN\\DATN.NDDUNG.API\\DATN.BLL\\DATN.BLL.csproj",
+      "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
+      "outputPath": "D:\\Documents\\Documents\\Đồ án tốt nghiệp\\DATN\\DATN.NDDUNG.API\\DATN.BLL\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net6.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "projectReferences": {
+            "D:\\Documents\\Documents\\Đồ án tốt nghiệp\\DATN\\DATN.NDDUNG.API\\DATN.Common\\DATN.Common.csproj": {
+              "projectPath": "D:\\Documents\\Documents\\Đồ án tốt nghiệp\\DATN\\DATN.NDDUNG.API\\DATN.Common\\DATN.Common.csproj"
+            },
+            "D:\\Documents\\Documents\\Đồ án tốt nghiệp\\DATN\\DATN.NDDUNG.API\\DATN.DAL\\DATN.DAL.csproj": {
+              "projectPath": "D:\\Documents\\Documents\\Đồ án tốt nghiệp\\DATN\\DATN.NDDUNG.API\\DATN.DAL\\DATN.DAL.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net6.0": {
+        "targetAlias": "net6.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

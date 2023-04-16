@@ -1,0 +1,50 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "DATN.BLL/1.0.0": {
+        "dependencies": {
+          "DATN.Common": "1.0.0",
+          "DATN.DAL": "1.0.0"
+        },
+        "runtime": {
+          "DATN.BLL.dll": {}
+        }
+      },
+      "DATN.Common/1.0.0": {
+        "runtime": {
+          "DATN.Common.dll": {}
+        }
+      },
+      "DATN.DAL/1.0.0": {
+        "dependencies": {
+          "DATN.Common": "1.0.0"
+        },
+        "runtime": {
+          "DATN.DAL.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "DATN.BLL/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DATN.Common/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DATN.DAL/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
