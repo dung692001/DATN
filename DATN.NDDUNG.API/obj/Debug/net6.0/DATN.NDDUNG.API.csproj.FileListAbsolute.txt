@@ -31,3 +31,9 @@ D:\Documents\Documents\Đồ án tốt nghiệp\DATN\DATN.NDDUNG.API\DATN.NDDUNG
 D:\Documents\Documents\Đồ án tốt nghiệp\DATN\DATN.NDDUNG.API\DATN.NDDUNG.API\obj\Debug\net6.0\DATN.NDDUNG.API.pdb
 D:\Documents\Documents\Đồ án tốt nghiệp\DATN\DATN.NDDUNG.API\DATN.NDDUNG.API\obj\Debug\net6.0\DATN.NDDUNG.API.genruntimeconfig.cache
 D:\Documents\Documents\Đồ án tốt nghiệp\DATN\DATN.NDDUNG.API\DATN.NDDUNG.API\obj\Debug\net6.0\ref\DATN.NDDUNG.API.dll
+D:\Documents\Documents\Đồ án tốt nghiệp\DATN\DATN.NDDUNG.API\DATN.NDDUNG.API\bin\Debug\net6.0\Dapper.dll
+D:\Documents\Documents\Đồ án tốt nghiệp\DATN\DATN.NDDUNG.API\DATN.NDDUNG.API\bin\Debug\net6.0\MySqlConnector.dll
+D:\Documents\Documents\Đồ án tốt nghiệp\DATN\DATN.NDDUNG.API\DATN.NDDUNG.API\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+D:\Documents\Documents\Đồ án tốt nghiệp\DATN\DATN.NDDUNG.API\DATN.NDDUNG.API\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+D:\Documents\Documents\Đồ án tốt nghiệp\DATN\DATN.NDDUNG.API\DATN.NDDUNG.API\bin\Debug\net6.0\Newtonsoft.Json.dll
+D:\Documents\Documents\Đồ án tốt nghiệp\DATN\DATN.NDDUNG.API\DATN.NDDUNG.API\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll

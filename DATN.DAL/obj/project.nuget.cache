@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "+r8gUudFe1HSN5u9IBQwloDaaot4T+WlBMm33DgMzNtVdSpqPRvqsLv1o50iNzx4d1FEARq+1Pmv0aSudhlNFQ==",
+  "dgSpecHash": "gGQ/4M/M/CamZqWBbamRiHR7eE7FJsDntjSIMVbbrnRf2x62PaDFJxZEwviZmlja2fUpfZrCbx8g3foQWdFu1Q==",
   "success": true,
   "projectFilePath": "D:\\Documents\\Documents\\Đồ án tốt nghiệp\\DATN\\DATN.NDDUNG.API\\DATN.DAL\\DATN.DAL.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\ACER\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
+    "C:\\Users\\ACER\\.nuget\\packages\\mysqlconnector\\2.2.5\\mysqlconnector.2.2.5.nupkg.sha512"
+  ],
   "logs": []
 }
