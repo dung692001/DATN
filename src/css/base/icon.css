@@ -1,0 +1,222 @@
+.icon {
+	cursor: pointer;
+	background-image: url('../../assets/imgs/Sprites.64af8f61.svg') !important;
+}
+.icon__search {
+	background: no-repeat -992px -360px;
+	width: 16px;
+	height: 16px;
+}
+
+.icon__toggle {
+	background: no-repeat -424px -86px;
+    width: 24px;
+    height: 24px;  
+}
+
+.icon__controlmenu {
+	background: no-repeat -847px -35px;
+	width: 16px;
+	height: 14px;
+	cursor: pointer;
+}
+
+.icon__controlmenu-white {
+	background: no-repeat -316px -37px;
+	width: 16px;
+	height: 14px;
+	cursor: pointer;
+}
+
+.icon__bell {
+    background: no-repeat -788px -30px;
+	width: 22px;
+	height: 25px;
+}
+
+.icon__avatar {
+    background: no-repeat -352px -894px;
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+ }
+
+.icon__moreinfo {
+    background: no-repeat -467px -414px;
+	width: 10px;
+	height: 5px;
+}
+
+.icon__menu__dialog {
+    background: no-repeat -33px -1630px;
+	width: 18px;
+	height: 20px;
+}
+
+.icon__menu__cash {
+    background: no-repeat -78px -1631px;
+	width: 14px;
+	height: 18px;
+}
+
+.icon__menu_deposits {
+	background: no-repeat -121px -1633px;
+	width: 16px;
+	height: 16px;
+}
+
+.icon__menu__buy {
+	background: no-repeat -165px -1632px;
+	width: 16px;
+	height: 18px;
+}
+
+.icon__menu__sell {
+	background: no-repeat -206px -1631px;
+	width: 20px;
+	height: 18px;
+}
+
+.icon__menu__bill {
+	background: no-repeat -254px -1632px;
+	width: 14px;
+	height: 17px;
+}
+
+.icon__menu__warehouse {
+	background: no-repeat -294px -1632px;
+	width: 18px;
+	height: 17px;
+}
+
+.icon__menu__tool {
+	background: no-repeat -339px -1633px;
+	width: 18px;
+	height: 17px;
+}
+
+.icon__menu__asset {
+	background: no-repeat -382px -1632px;
+	width: 17px;
+	height: 18px;
+}
+
+.icon__menu__tax {
+	background: no-repeat -427px -1634px;
+	width: 16px;
+	height: 16px;
+}
+
+.icon__menu__price {
+	background: no-repeat -471px -1633px;
+	width: 17px;
+	height: 17px;
+}
+
+.icon__menu__all {
+	background: no-repeat -514px -1632px;
+	width: 16px;
+	height: 18px;
+}
+
+.icon__menu__report {
+	background: no-repeat -552px -1636px;
+	width: 14px;
+	height: 13px;
+}
+
+.icon__menu__budget {
+	background: no-repeat -382px -1664px;
+	width: 16px;
+	height: 16px;
+}
+
+.icon__menu__financial-analysis {
+	background: no-repeat -207px -1667px;
+	width: 17px;
+	height: 14px;
+}
+
+.icon__refresh {
+    background: no-repeat -425px -203px;
+	width: 21px;
+	height: 23px;
+	cursor: pointer;
+}
+
+.icon__refresh:hover {
+    background: no-repeat -1098px -90px;
+	width: 20px;
+	height: 21px;
+}
+
+.icon__close {
+	background: no-repeat -147px -147px;
+	width: 18px;
+	height: 18px;
+	cursor: pointer;
+}
+
+.icon__help {
+	background: no-repeat -89px -145px;
+	width: 22px;
+	height: 22px;
+}
+
+.icon__dropdown {
+	background: no-repeat -564px -365px;
+	width: 8px;
+	height: 5px;
+}
+
+.icon__error {
+	background: no-repeat -32px -962px;
+	width: 32px;
+	height: 32px;
+}
+
+.icon__input-down {
+	background: no-repeat -1129px -365px;
+	width: 14px;
+	height: 8px;
+}
+
+.icon__table__material {
+	background: no-repeat -900px -365px;
+	width: 8px;
+	height: 5px;
+}
+
+.icon__warning {
+	background: no-repeat -598px -463px;
+	width: 36px;
+	height: 37px;
+}
+
+.icon__dialog__date {
+	background: no-repeat -128px -312px;
+	width: 16px;
+	height: 16px;
+}
+.icon__info {
+	background: no-repeat -672px -462px;
+	width: 36px;
+	height: 36px;
+}
+.icon__checkbox {
+	background: no-repeat -1224px -360.5px;
+	width: 14px;
+	height: 11px;
+}
+
+.icon__excel--export{
+	background: no-repeat -705px -202px;
+	width: 23px;
+	height: 20px;
+}
+.icon__excel--export:hover{
+	background: no-repeat -1265px -90px;
+	width: 23px;
+	height: 20px;
+}
+

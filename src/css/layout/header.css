@@ -1,0 +1,40 @@
+.header{
+    height: 48px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+}
+
+.header__dropdown {
+    cursor: pointer;
+}
+
+.header__left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header__left select{
+    border: none;
+}
+
+.header__right {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.header-branch-name {
+    padding-left: 10px;
+    font-weight: 600;
+    max-width: 600px;
+    padding-right: 36px;
+}
+
+.header-branch-icon {
+    width: 34px;
+    height: 48px;
+}
+
+

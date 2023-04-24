@@ -1,0 +1,30 @@
+.dropdown {
+    width: 100px;
+}
+
+button:hover .dropdown-list {
+    opacity: 1;
+    visibility: visible;
+}
+
+.dropdown-select {
+    border-radius: 4px;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.dropdown-list {
+    border-radius: 4px;
+    background-color: #fff;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2 linear;
+}
+
+.dropdown-list__item {
+
+}

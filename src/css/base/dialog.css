@@ -1,0 +1,201 @@
+.dialog__popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.24);
+    display: none;
+    justify-content: center;
+    align-items: center;   
+    z-index: 9999;
+}
+
+.dialog--open {
+    display: flex;
+}
+
+.isShowDialog {
+    display: flex!important;
+   
+}
+
+.isShowPopup{
+     display: flex!important;
+}
+
+.isShowMaterial{
+    display: block!important;
+}
+
+.isShowBlock{
+    display: block!important;
+}
+
+.isShowFlex{
+    display: block!important;
+    
+}
+
+.dialog {
+    width: 900px;
+    min-width: 900px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 6px;
+    box-sizing: border-box;
+    background-color: #FFFFFF;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dialog__header {
+    width: 100%;
+    height: 72px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dialog__title {
+    padding: 20px 32px;
+    padding-right: 12px;
+    height: 72px;
+}
+
+.dialog__checkbox {
+    padding: 0 19.5px;
+}
+
+.dialog__component__text {
+    padding-left: 10px;
+}
+
+.dialog__header__button {
+    width: 78px;
+    height: 72px;
+    padding: 12px;
+    display: flex;
+}
+
+.dialog__container {
+    box-sizing: border-box;
+    height: calc(100% - 72px);
+    padding: 0 32px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.dialog__content {
+    box-sizing: border-box;
+    height: calc(100% - 87px);
+    
+}
+
+.dialog__content__up{
+    width: 100%;
+    padding-bottom: 12px;
+    display: flex;
+}
+
+.dialog__content__down{
+    width: 100%;
+}
+
+.dialog__content__left {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding-right: 26px;
+}
+
+.dialog__content__right {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.dialog__row {
+    position: relative!important;
+    display: flex;
+    width: 100%;
+    padding-bottom: 12px;
+    
+}
+
+.dialog__item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.dialog__dropdown__data {
+    display: none;
+    border: 1px solid #000000;
+    background-color: #fff;
+    position: absolute;
+    top:54px;   
+    left: 0;
+    border-radius: 4px;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.24) ;
+    box-sizing: border-box;
+    z-index: 9;
+}
+
+.dialog__dropdown__data .dropdown__item {
+    height: 35px;
+    padding: 0;
+}
+
+.dialog__label{
+    display: flex;
+    align-items: center;
+    height: 21px;
+}
+
+.dialog__footer {
+    height: 87px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.dialog__line{
+    width: 100%;
+    border-top: 1px solid #e0e0e0;
+    margin: 32px 0 20px;
+    position: relative;
+}
+
+.dialog__footer__button {
+    display: flex;
+    justify-content: space-between;
+}
+
+.dialog__footer button {
+
+}
+
+.dialog__close {
+    margin: 10px 24px 10px 16px;   
+}
+
+.cboDepartmentName {
+    position: relative;
+}
+
+.cboDateOfBirth {
+    position: relative;
+}
+
+.cboIdentityDate {
+    position: relative;
+}
+
+.dialog__lable{
+    font-size: 12px;
+    font-weight: 700;
+    margin-right: 3px;
+    cursor: pointer;
+}

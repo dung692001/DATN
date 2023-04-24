@@ -1,0 +1,120 @@
+.button {
+    background-color: #2ca01c;
+    border-radius: 4px;
+    height: 36px;
+    color: #ffffff;
+    padding: 6px 16px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.button__material {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 16px;
+    box-sizing: border-box;
+}
+
+.button__material__border {
+    border: 1px solid #0075c0;
+}
+
+.button24 {
+    border: none;
+    cursor: pointer;
+    margin-left: 4px;
+    margin-top: 2px;
+}
+.button__outline {
+    border: 1px solid #8d9096;
+    color: #111;
+    background-color: transparent;
+}
+
+.button__outline__dialog:focus{
+    outline: none;
+    background-color: #d2d3d6!important;  
+    color: #111;
+}
+
+.button__dialog:focus{
+    outline: none;
+    background-color: #35bf22;
+}
+
+.button__outline:hover {
+    background-color: #d2d3d6!important;  
+    color: #111;
+}
+
+.button__outline:active {
+    background-color: #d2d3d6!important;  
+    color: #111!important;
+}
+
+.button__dialog__padding {
+    padding: 6px 16px;
+}
+
+.button:hover {
+    background-color: #35bf22;
+}
+
+.button:active {
+    background-color: #01B075;
+    color: #ffffff;
+}
+
+.button--close {
+    border: 1px solid #8d9096;
+    color: #111;
+    background-color: #fff;
+    align-self: start;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.button--close:hover {
+    background-color: #d2d3d6;  
+    color: #111;
+}
+
+.button__edit {
+    padding: 6px ;
+    border: none;
+    color: #0075c0;
+    background-color: inherit;
+    cursor: pointer;
+    font-family: 'MISA Fonts Bold';
+}
+
+.button--disable {
+    opacity: 0.5;
+    cursor: default !important;
+}
+
+.button__batch__execution{
+    position: relative;     
+    border: 2px solid #3b3c3f;
+    border-radius: 30px;
+    color: #111;
+    background-color: #fff;
+    padding: 0 12px 0 16px;
+    font-size: 13px ;
+}
+
+.button__batch__execution:hover{
+    background-color: #d2d3d6;
+}
+.button__batch__execution:active{
+    background-color: #bbbcbc;
+    color: #111;
+}
+
+.button__batch__execution .dropdown__icon__item{
+    width: 24px;
+}

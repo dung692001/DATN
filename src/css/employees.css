@@ -1,0 +1,300 @@
+@import url(./base/button.css);
+@import url(./base/fieldinput.css);
+@import url(./base/icon.css);
+@import url(./base/table.css);
+@import url(./base/checkbox.css);
+@import url(./base/dialog.css);
+@import url(./base/border.css);
+@import url(./base/flex.css);
+@import url(./base/radio.css);
+@import url(./base/dropdown.css);
+@import url(./base/popup.css);
+@import url(./base/date.css);
+@import url(./base/loading.css);
+@import url(./base/toastMessage.css);
+@import url(./base/combobox.css);
+@import url(./base/dateTime.css);
+@import url(./layout/container.css);
+@import url(./layout/menu.css);
+@import url(./layout/main.css);
+@import url(./layout/header.css);
+@import url(./layout/content.css);
+
+
+@import url(./base/table.css);
+
+
+@font-face {
+    font-family: MISA Fonts;
+    src: url(../assets/fonts/notosans-regular.2cb88a13.woff2);
+}
+
+@font-face {
+    font-family: MISA Fonts Bold;
+    src: url(../assets/fonts/notosans-bold.3ede5aff.woff2);
+}
+
+@font-face {
+    font-family: MISA Fonts Italic;
+    src: url(../assets/fonts/notosans-italic.1c1aaac9.woff2);
+}
+
+@font-face {
+    font-family: MISA Fonts Semibold;
+    src: url(../assets/fonts/notosans-semibold.df3e6dc4.woff2);
+}
+
+:root{
+    --width-menu: 178px;
+}
+
+.title {
+    font-family: MISA Fonts Bold;
+    font-size: 24px;
+    font-weight: 700;
+    color: #111;
+}
+
+.title__popup{
+    font-family: MISA Fonts Bold;
+    font-size: 24px;
+    font-weight: 700;
+    color: #111;
+}
+
+.title-2 {
+    font-family: MISA Fonts Semibold;
+    font-size: 14px;
+    color: #fff;
+}
+
+.text {
+    font-family: MISA Fonts;
+    font-size: 12px;
+    color: #111111;
+}
+
+body {
+    font-family: MISA Fonts;
+    font-size: 13px;
+    color: #111111;
+}
+
+.p-lr-4 {
+    padding: 0 4px;
+}
+
+.p-r-6 {
+    padding-right: 6px;
+}
+
+.p-0 {
+    padding: 0;
+}
+
+.p-r-23 {
+    padding-right: 23px;
+}
+
+.p-r-36 {
+    padding-right: 36px;
+}
+
+.p-l-10 {
+    padding: 0 5px;
+}
+
+.padding-left-10 {
+    padding-left: 10px;
+}
+
+.margin-left-right-10 {
+    margin: 0 10px;
+}
+
+
+/* width */
+.w-25 {
+    width: 25%!important;
+}
+
+
+.w-40 {
+    width: 40%!important;
+}
+
+.w-60 {
+    width: 60%!important;
+}
+
+.w-20px {
+    min-width: 20px;
+}
+
+.w-50px {
+    min-width: 50px;
+}
+
+.w-100px {
+    min-width: 100px;
+}
+
+.w-125px {
+    min-width: 125px;
+}
+
+.w-150px {
+    min-width: 150px;
+}
+.w-170px {
+    min-width: 170px;
+}
+.w-200px {
+    min-width: 200px;
+}
+
+/* lable red */
+.lb__red {
+    color: red;
+}
+
+/* margin 0*/
+.margin-0{
+    margin: 0;
+}
+
+.margin-20{
+    margin-right: 20px;
+}
+
+.tbDepartmentName {
+    border: none;
+}
+
+.dx-datebox-calendar .dx-dropdowneditor-icon::before {
+    background-image: url('../assets/imgs/Sprites.64af8f61.svg') !important;
+    content: ""!important;
+    background: no-repeat -128px -312px;
+	width: 16px;
+	height: 16px;
+    position: absolute;
+    display: block;
+    width: 18px;
+    top: 50%;
+    margin-top: -9px;
+    left: 50%;
+    margin-left: -9px;
+}
+
+.dx-placeholder::before {
+    font-style: italic;
+    height: 32px;
+}
+
+.button_hidden{
+    width: 0px;
+    padding: 0px;
+    border: 0px;
+}
+
+.height-100{
+    height: 100%;
+}
+
+.dx-texteditor-container {
+    height: 30px !important;
+    box-sizing: border-box !important;
+}
+
+.dx-texteditor-input {
+    padding: 5px 0px 5px 10px !important;
+    min-height: 30px!important;
+}
+
+.dx-placeholder {
+    top:-2px !important;
+}
+
+::-webkit-input-placeholder {
+    font-style: italic;
+    opacity: 0.8;
+ }
+
+ .dx-invalid.dx-texteditor.dx-editor-outlined.dx-show-invalid-badge .dx-texteditor-input-container::after{
+    display: none;
+ }
+ .dx-overlay-content.dx-invalid-message-content{
+    display: none;
+ }
+
+ .dx-state-focus{
+    display: none;
+ }
+ 
+[tooltip-title]:hover:after {
+    opacity: 1;
+    transition: all 0.1s ease 0.5s;
+    display: block;
+}
+
+[tooltip-title]:after{
+   content: attr(tooltip-title);
+   background-color: #515257; 
+   color: #FFF;
+   position: absolute;
+   font-family: MISA Fonts;
+   font-weight: 100;
+   width: auto;
+   white-space: nowrap; 
+   font-size: 12px;
+   height: 24px;
+   z-index: 99999;
+   top: 100%;
+   right: 5px;
+   padding: 4px;
+   text-align: center;
+   width: auto;
+   box-sizing: border-box;
+   opacity: 0;
+   display: none;
+
+}
+
+.tooltip-title-dialog{
+    position: relative;
+}
+
+.tooltip-title-dialog:after{
+   content: attr(tooltip-content);
+   background-color: #515257; 
+   color: #FFF;
+   position: absolute;   
+   top: 75%;
+   right: 5%;
+   font-family: MISA Fonts;
+   font-weight: 100;
+   width: auto;
+   white-space: nowrap; 
+   font-size: 12px;
+   height: 24px;
+   z-index: 99;
+   line-height: 24px;
+   width: auto;
+   border-radius: 2px;
+   display: none;
+}
+
+.tooltip-title-dialog:hover:after {
+    display: block;
+}
+
+[tooltip-title]{
+    position: relative;
+}
+
+.base__relative {
+    position: relative;
+}
+
+
+ 

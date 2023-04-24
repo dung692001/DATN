@@ -1,0 +1,43 @@
+.el-input--default .el-input__wrapper {
+    padding: 0px 12px!important;
+    flex-direction: row-reverse!important;
+}
+
+.el-input__prefix-inner .el-icon>svg{
+    display: none!important;
+}
+
+.el-input__suffix-inner{
+    display: none!important;
+}
+
+.el-date-editor.el-input, .el-date-editor.el-input__wrapper {
+    width: unset!important;
+}
+
+.el-input__prefix-inner {
+    background-image: url(http://localhost:8080/img/Sprites.64af8f61.2ff7618a.svg) !important;
+    background: no-repeat -128px -312px;
+    width: 16px;
+    height: 16px;
+}
+
+.el-input__prefix{
+    align-items: center;
+}
+
+.el-input__wrapper{
+    box-shadow: unset!important;
+    border: 1px solid #babec5;
+    border-radius: 2px!important;
+}
+
+.fieldinput__date--error .el-input__wrapper{
+    border: 1px solid red;
+    box-shadow: unset!important;
+}
+
+.el-input__wrapper.is-focus{
+    border: 1px solid #2ca01c;
+    box-shadow: unset!important;
+}

@@ -9,6 +9,16 @@ const router = createRouter({
             component: AppLayout,
             children: [
                 {
+                    path: '/src/components/pages/employee/employeeList',
+                    name: 'employeeList',
+                    component: () => import('@/components/pages/employee/EmployeeList.vue')
+                },
+                {
+                    path: '/uikit/employee',
+                    name: 'employee',
+                    component: () => import('@/views/uikit/Employee.vue')
+                },
+                {
                     path: '/',
                     name: 'dashboard',
                     component: () => import('@/views/Dashboard.vue')

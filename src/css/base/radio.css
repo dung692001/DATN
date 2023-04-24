@@ -1,0 +1,36 @@
+.radiobutton {
+    background-color: #ffffff;
+    border: 1px solid #BBBBBB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 40px;
+    color: #000000;
+}
+
+.radiobutton__input {
+    width: 18px;
+    height: 18px;
+    accent-color: #2ca01c;
+    margin:0;
+    padding:0;
+}
+
+.radiobutton__input:focus {
+    outline: none;
+}
+
+.radio--selected {
+    width: 18px;
+    height: 18px;
+    border: 1px solid rgb(72, 146, 225);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.radiobutton__text {
+    margin-left: 10px;
+}

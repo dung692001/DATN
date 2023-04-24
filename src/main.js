@@ -102,8 +102,27 @@ import VirtualScroller from 'primevue/virtualscroller';
 
 import CodeHighlight from '@/components/CodeHighlight.vue';
 import BlockViewer from '@/components/BlockViewer.vue';
-
+import BaseLoading from './components/base/BaseLoading.vue';
+import BaseDropdown from './components/base/BaseDropdown.vue';
+import BaseButton from './components/base/BaseButton.vue';
+import BaseInput from './components/base/BaseInput.vue';
+import BaseMenuItem from './components/base/BaseMenuItem.vue';
+import BasePopup from './components/base/BasePopup.vue';
+import BaseRadio from './components/base/BaseRadio.vue';
+import BaseMSDate from './components/base/BaseMSDate.vue';
+import BaseCheckBox from './components/base/BaseCheckBox.vue';
+import BaseContextMenu from './components/base/BaseContextMenu.vue';
+import BaseButtonPaging from './components/base/BaseButtonPaging.vue';
+import BaseToastMessage from './components/base/BaseToastMessage.vue';
+import BaseCombobox from './components/base/BaseCombobox.vue';
 import '@/assets/styles.scss';
+
+import 'element-plus/es/components/date-picker/style/css';
+import ElementPlus from 'element-plus';
+import locale from 'element-plus/lib/locale/lang/vi';
+import 'devextreme/dist/css/dx.light.css';
+import axios from 'axios';
+import VueAxios from 'vue-axios';
 
 const app = createApp(App);
 
@@ -211,4 +230,21 @@ app.component('TreeTable', TreeTable);
 app.component('TriStateCheckbox', TriStateCheckbox);
 app.component('VirtualScroller', VirtualScroller);
 
+app.component('BaseLoading', BaseLoading);
+app.component('BaseDropdown', BaseDropdown);
+app.component('BaseInput', BaseInput);
+app.component('BaseMenuItem', BaseMenuItem);
+app.component('BasePopup', BasePopup);
+app.component('BaseButton', BaseButton);
+app.component('BaseRadio', BaseRadio);
+app.component('BaseMSDate', BaseMSDate);
+app.component('BaseCheckBox', BaseCheckBox);
+app.component('BaseContextMenu', BaseContextMenu);
+app.component('BaseButtonPaging', BaseButtonPaging);
+app.component('BaseToastMessage', BaseToastMessage);
+app.component('BaseCombobox', BaseCombobox);
+app.use(router, VueAxios, axios);
+app.use(ElementPlus, {
+    locale: locale
+});
 app.mount('#app');

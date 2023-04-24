@@ -1,0 +1,34 @@
+.loading {
+    animation: changecolor linear 4s infinite; 
+}
+
+.loading__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loading__icon {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    border: none;
+    animation: rotate linear 2s infinite;
+    background: transparent url("../../assets/loading.svg") no-repeat center;
+
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg)
+    }
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
+.loading__text {
+    font-family: MISA Fonts Bold;
+    font-size: 15px;
+    color: #FFFFFF;
+}

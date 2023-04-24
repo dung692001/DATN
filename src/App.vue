@@ -4,4 +4,6 @@
     <router-view />
 </template>
 
-<style scoped></style>
+<style>
+@import url(./css/employees.css);
+</style>

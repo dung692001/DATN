@@ -1,0 +1,47 @@
+.fieldinput {
+    border-radius: 2px;
+    height: 32px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #babec5;
+    transition: 0.25s ease;
+    padding-left: 10px;
+    padding-right: 12px;
+    font-size: 13px;
+    border-color: #bbbbbb;
+    font-family: 'MISA Fonts';
+}
+
+.fieldinput__content {
+    position: relative;
+}
+
+.fieldinput__dialog {
+    height: 32px; 
+}
+
+.fieldinput__error--required {
+    border: 1px solid red;
+}
+
+.fieldinput:focus {
+    outline: none;
+    font-size: 13px;
+    color: #000000;
+    border-color: #2ca01c;
+}
+
+.fieldinput__icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding-right: 6px;
+}
+
+.fieldinput__date--error {
+    
+}
+
+.fieldinput__paddingicon {
+    padding-right: 35px;
+}

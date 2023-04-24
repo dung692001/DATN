@@ -1,0 +1,56 @@
+.popup {
+    width: 380px;
+    min-width: 380px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 6px;
+    background-color: #FFFFFF;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 32px;
+}
+
+.popup__item {
+    display: flex;
+}
+
+.popup__message {
+    margin-bottom: 32px;
+    padding-left: 16px;
+    padding-top: 12px;
+    margin-top: 0;
+    height: auto;
+}
+
+.popup__line {
+    height: 1px;
+    background: #b8bcc3;
+    margin-bottom: 20px;
+}
+
+.popup__footer {
+    
+}
+
+.popup__footer--delete {
+    justify-content: space-between;
+}
+
+.popup__footer--agree {
+    display: none;
+    justify-content: end;
+}
+
+.popup__footer--error {
+    display: none;
+    justify-content: center;
+}
+
+.popup__footer--warning {
+    display: none;
+    justify-content: space-between;
+}
+
+.popup__footer--info {
+    display: none;
+    justify-content: space-between;
+}
+

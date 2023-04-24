@@ -1,0 +1,17 @@
+.combobox__data--row{
+    display: flex;
+}
+.combobox__data--col1{
+    width: 100px;
+    text-align: left;
+    padding: 0 10px;
+}
+.combobox__data--col2{
+    text-align: left;
+    padding: 0 10px;
+}
+
+.combobox__data--selected {
+    background-color: #ebedf0;
+    color: #35bf22;
+}
