@@ -60,6 +60,21 @@ namespace DATN.NDDUNG.API.Controllers
             }
         }
 
+        [HttpPost]
+        public IActionResult Post(MISAEntity entity)
+        {
+            try
+            {
+                var res = _service.InsertService(entity);
+               return StatusCode(201, res);
+            }
+            catch (Exception ex)
+            {
+                return HandleException(ex, 150);
+            }
+        }
+
+
         /// <summary>
         /// Xử lí exception 
         /// </summary>
