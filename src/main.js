@@ -2,6 +2,9 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
 
+import { VueFire, VueFireAuth } from 'vuefire';
+import { firebaseApp } from './firebase';
+
 import PrimeVue from 'primevue/config';
 import AutoComplete from 'primevue/autocomplete';
 import Accordion from 'primevue/accordion';
@@ -115,6 +118,8 @@ import BaseContextMenu from './components/base/BaseContextMenu.vue';
 import BaseButtonPaging from './components/base/BaseButtonPaging.vue';
 import BaseToastMessage from './components/base/BaseToastMessage.vue';
 import BaseCombobox from './components/base/BaseCombobox.vue';
+import BaseUpload from './components/base/BaseUpload.vue';
+import BaseDownload from './components/base/BaseDownload.vue';
 import '@/assets/styles.scss';
 
 import 'element-plus/es/components/date-picker/style/css';
@@ -243,7 +248,14 @@ app.component('BaseContextMenu', BaseContextMenu);
 app.component('BaseButtonPaging', BaseButtonPaging);
 app.component('BaseToastMessage', BaseToastMessage);
 app.component('BaseCombobox', BaseCombobox);
+app.component('BaseUpload', BaseUpload);
+app.component('BaseDownload', BaseDownload);
+
 app.use(router, VueAxios, axios);
+app.use(VueFire, {
+    firebaseApp,
+    modules: [VueFireAuth()]
+});
 app.use(ElementPlus, {
     locale: locale
 });

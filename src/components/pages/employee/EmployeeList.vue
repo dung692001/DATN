@@ -310,11 +310,9 @@ export default {
             var genderName = '';
             if (gender == genderEmployee.male) {
                 genderName = genderNameEmployee.male;
-            }
-            if (gender == genderEmployee.feMale) {
+            } else if (gender == genderEmployee.feMale) {
                 genderName = genderNameEmployee.feMale;
-            }
-            if (gender == genderEmployee.other) {
+            } else {
                 genderName = genderNameEmployee.other;
             }
             return genderName;
@@ -635,7 +633,8 @@ export default {
             /** biến chưa id theo hàng*/
             employeeRowId: '',
             /** biến chứa loại delete, 0 là xóa 1, 1 là xóa nhiều */
-            deleteStatus: 0
+            deleteStatus: 0,
+            dataLoadImg: 'images/9317f7fa-21c7-48a8-8770-c47e25258c8d'
         };
     }
 };
@@ -686,6 +685,7 @@ export default {
                             </BaseCheckBox>
                             <!-- <input type="checkbox" class="checkbox__input" /> -->
                         </th>
+                        <th class="w-50px">ẢNH</th>
                         <th class="w-125px">MÃ NHÂN VIÊN</th>
                         <th class="w-200px">TÊN NHÂN VIÊN</th>
                         <th class="w-100px">GIỚI TÍNH</th>
@@ -722,18 +722,21 @@ export default {
                                 >
                                 </BaseCheckBox>
                             </td>
+                            <td>
+                                <BaseDownload :linkImg="dataLoadImg"> </BaseDownload>
+                            </td>
                             <td class="tbEmployeeCode">{{ emp.EmployeeCode }}</td>
-                            <td>{{ emp.FullName }}</td>
+                            <td>{{ emp.EmployeeName }}</td>
                             <td>{{ formatGender(emp.Gender) || '' }}</td>
                             <td class="table__center">
                                 {{ formatDate(emp.DateOfBirth) || '' }}
                             </td>
-                            <td>{{ emp.IdentityNumber }}</td>
-                            <td>{{ emp.PositionName }}</td>
+                            <td>{{ emp.IdentifyNumber }}</td>
+                            <td>{{ emp.PositionsName }}</td>
                             <td>{{ emp.DepartmentName }}</td>
-                            <td>{{ emp.BankAccountNumber }}</td>
+                            <td>{{ emp.BankNumber }}</td>
                             <td>{{ emp.BankName }}</td>
-                            <td>{{ emp.BankBranch }}</td>
+                            <td>{{ emp.BankCode }}</td>
                             <td class="table__center">
                                 <div class="table__combo__button flex">
                                     <div @click="btnEditOnClick(emp)">
