@@ -123,7 +123,31 @@
   <data name="Error_InputNotValid" xml:space="preserve">
     <value>Dữ liệu đầu vào không hợp lệ!</value>
   </data>
-  <data name="ValiedateError_GroupNameIsExist" xml:space="preserve">
-    <value>Tên nhóm đã tồn tại</value>
+  <data name="Error_Validate" xml:space="preserve">
+    <value>Dữ liệu không hợp lệ!</value>
+  </data>
+  <data name="ValidateError_DepartmentCodeNotEmpty" xml:space="preserve">
+    <value>Mã phòng ban không được phép để trống</value>
+  </data>
+  <data name="ValidateError_DepartmentIdNotEmpty" xml:space="preserve">
+    <value>Khóa chính phòng ban không được phép để trống</value>
+  </data>
+  <data name="ValidateError_DepartmentNameNotEmpty" xml:space="preserve">
+    <value>Tên phòng ban không được phép để trống</value>
+  </data>
+  <data name="ValidateError_EmailNotValid" xml:space="preserve">
+    <value>Email không đúng định dạng</value>
+  </data>
+  <data name="ValidateError_EmployeeCodeNotEmpty" xml:space="preserve">
+    <value>Mã nhân viên không được phép để trống</value>
+  </data>
+  <data name="ValidateError_EmployeeFullNameNotEmpty" xml:space="preserve">
+    <value>Họ và tên nhân viên không được phép để trống</value>
+  </data>
+  <data name="ValiedateError_DepartmentCodeIsExist" xml:space="preserve">
+    <value>Mã phòng ban không được phép trùng</value>
+  </data>
+  <data name="ValiedateError_EmployeeCodeIsExist" xml:space="preserve">
+    <value>Mã nhân viên không được phép trùng</value>
   </data>
 </root>

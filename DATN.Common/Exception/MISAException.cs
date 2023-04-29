@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DATN.Common
 {
-    public class MISAException:Exception
+    public class MISAException: Exception
     {
         /// <summary>
         /// Tin nhắn 
@@ -19,16 +19,15 @@ namespace DATN.Common
         /// </summary>
         /// <param name="msg">Tin nhắn</param>
         /// <param name="listMsgs">Danh sách tin nhắn</param>
-        public MISAException(string msg = null, Dictionary<string, string> listMsgs = null)
+        public MISAException(string msg = null, Dictionary<string, string> listMsgs= null)
         {
             this.MISAMessenger = msg;
             erros = new Dictionary<string, Dictionary<string, string>>();
-            erros.Add("validateError", listMsgs);
+            erros.Add("validateError", listMsgs); 
         }
 
         public override string Message => this.MISAMessenger;
 
-        public override IDictionary Data => this.erros;
-
+        public override IDictionary Data => this.erros; 
     }
 }

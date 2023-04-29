@@ -24,13 +24,25 @@ namespace DATN.Common.Entities
         /// </summary>
         public Guid DepartmentId { get; set; }
         /// <summary>
+        /// Tên nhân viên
+        /// </summary>
+        public string? DepartmentName { get; set; }
+        /// <summary>
         /// thông tin dự án
         /// </summary>
         public Guid OrganizationId { get; set; }
         /// <summary>
+        /// Tên nhân viên
+        /// </summary>
+        public string? OrganizationName { get; set; }
+        /// <summary>
         /// Thông tin vị trí
         /// </summary>
         public Guid PositionsId { get; set; }
+        /// <summary>
+        /// Tên nhân viên
+        /// </summary>
+        public string? PositionsName { get; set; }
 
         /// <summary>
         /// Mã người dùng

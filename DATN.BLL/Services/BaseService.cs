@@ -145,7 +145,7 @@ namespace DATN.BLL.Services
         /// <param name="entity">các thuộc tính của đối tượng</param>
         /// <returns></returns>
         /// Created By: NDDung (09/08/2022)
-        public virtual bool ValidateCustom(Guid? id, MISAEntity entity)
+        protected virtual bool ValidateCustom(Guid? id, MISAEntity entity)
         {
             return true;
         }

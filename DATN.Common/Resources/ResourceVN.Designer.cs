@@ -79,11 +79,83 @@ namespace DATN.Common.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tên nhóm đã tồn tại.
+        ///   Looks up a localized string similar to Dữ liệu không hợp lệ!.
         /// </summary>
-        public static string ValiedateError_GroupNameIsExist {
+        public static string Error_Validate {
             get {
-                return ResourceManager.GetString("ValiedateError_GroupNameIsExist", resourceCulture);
+                return ResourceManager.GetString("Error_Validate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mã phòng ban không được phép để trống.
+        /// </summary>
+        public static string ValidateError_DepartmentCodeNotEmpty {
+            get {
+                return ResourceManager.GetString("ValidateError_DepartmentCodeNotEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Khóa chính phòng ban không được phép để trống.
+        /// </summary>
+        public static string ValidateError_DepartmentIdNotEmpty {
+            get {
+                return ResourceManager.GetString("ValidateError_DepartmentIdNotEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tên phòng ban không được phép để trống.
+        /// </summary>
+        public static string ValidateError_DepartmentNameNotEmpty {
+            get {
+                return ResourceManager.GetString("ValidateError_DepartmentNameNotEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email không đúng định dạng.
+        /// </summary>
+        public static string ValidateError_EmailNotValid {
+            get {
+                return ResourceManager.GetString("ValidateError_EmailNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mã nhân viên không được phép để trống.
+        /// </summary>
+        public static string ValidateError_EmployeeCodeNotEmpty {
+            get {
+                return ResourceManager.GetString("ValidateError_EmployeeCodeNotEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Họ và tên nhân viên không được phép để trống.
+        /// </summary>
+        public static string ValidateError_EmployeeFullNameNotEmpty {
+            get {
+                return ResourceManager.GetString("ValidateError_EmployeeFullNameNotEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mã phòng ban không được phép trùng.
+        /// </summary>
+        public static string ValiedateError_DepartmentCodeIsExist {
+            get {
+                return ResourceManager.GetString("ValiedateError_DepartmentCodeIsExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mã nhân viên không được phép trùng.
+        /// </summary>
+        public static string ValiedateError_EmployeeCodeIsExist {
+            get {
+                return ResourceManager.GetString("ValiedateError_EmployeeCodeIsExist", resourceCulture);
             }
         }
     }
