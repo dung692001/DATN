@@ -1,7 +1,7 @@
 <script>
 export default {
     name: 'BaseRadio',
-    emits: ['changeGender'],
+    emits: ['changeGender', 'changeMarrieStatus'],
     props: {
         // Tên của radio
         radioName: {
@@ -26,6 +26,9 @@ export default {
         // Giá trị của tabIndex
         tabIndex: {
             type: Number
+        },
+        radioType: {
+            type: Number
         }
     },
     methods: {
@@ -46,7 +49,11 @@ export default {
          * @Author NDDung (27/07/2022)
          */
         rdoOnClick() {
-            this.$emit('changeGender', this.value);
+            if (this.radioType == 0) {
+                this.$emit('changeGender', this.value);
+            } else if (this.radioType == 1) {
+                this.$emit('changeMarrieStatus', this.value);
+            }
         },
 
         /**
@@ -56,7 +63,11 @@ export default {
         rdoKeyUpHandle(e) {
             if (e.key === 'Enter' || e.key === ' ') {
                 this.isBorder = false;
-                this.$emit('changeGender', this.value);
+                if (this.radioType == 0) {
+                    this.$emit('changeGender', this.value);
+                } else if (this.radioType == 1) {
+                    this.$emit('changeMarrieStatus', this.value);
+                }
             }
             if (e.key === 'Tab') {
                 this.isBorder = true;

@@ -1,7 +1,7 @@
 <script>
 import { Resource } from '../../common/Resource.js';
 export default {
-    emits: ['setDepartmentName'],
+    emits: ['setDepartmentName', 'setOrganizationName', 'setPositionsName'],
     props: {
         // label của input
         label: {
@@ -79,6 +79,7 @@ export default {
         this.inputText = this.dataSelectedText;
         this.dataTemp = this.data;
         this.maxIndex = this.data.length;
+        this.isShowCbo = false;
     },
     watch: {
         /**
@@ -124,7 +125,15 @@ export default {
                 this.inputText = this.dataSelected[this.nameData];
                 this.inputId = this.dataSelected[this.idData];
                 this.showCombobox(false);
-                this.$emit('setDepartmentName', this.dataSelected);
+                if (this.dataSelected.DepartmentId) {
+                    this.$emit('setDepartmentName', this.dataSelected);
+                }
+                if (this.dataSelected.OrganizationId) {
+                    this.$emit('setOrganizationName', this.dataSelected);
+                }
+                if (this.dataSelected.PositionsId) {
+                    this.$emit('setPositionsName', this.dataSelected);
+                }
             } catch (error) {
                 console.log(error);
             }
@@ -140,6 +149,17 @@ export default {
                 this.$refs['input'].focus();
             }
             this.isShowData = isShow;
+        },
+
+        /**
+         *
+         */
+        toggleCombobox() {
+            if (this.isShowData) {
+                this.showCombobox(false);
+            } else {
+                this.showCombobox(true);
+            }
         },
 
         /**
@@ -269,6 +289,7 @@ export default {
                         this.$refs['input'].classList.remove('fieldinput__error--required');
                     }
                 }
+                //this.showCombobox(false);
             } catch (error) {
                 console.log(error);
             }
@@ -304,7 +325,9 @@ export default {
             // Tổng số phòng ban
             maxIndex: 0,
             // tooltip của input
-            inputTitle: ''
+            inputTitle: '',
+            // ẩn hiện cbo
+            isShowCbo: false
         };
     }
 };
@@ -317,7 +340,7 @@ export default {
         </div>
         <div class="fieldinput__content">
             <input type="text" class="fieldinput fieldinput__paddingicon" :tabIndex="tabIndex" ref="input" @keyup="handleKeyUp" @keydown="handleKeyDown" v-model="inputText" @input="filterInput()" @focus="showCombobox(true)" @blur="checkInput" />
-            <div @click="showCombobox(true)" v-if="inputIcon" class="dropdown__icon dropdown__icon__item flex">
+            <div @click="toggleCombobox()" v-if="inputIcon" class="dropdown__icon dropdown__icon__item flex">
                 <div :class="'icon ' + inputIcon"></div>
             </div>
         </div>

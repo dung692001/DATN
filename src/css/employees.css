@@ -108,6 +108,10 @@ body {
     padding-left: 10px;
 }
 
+.padding-bottom-26 {
+    padding-bottom: 26px;
+}
+
 .margin-left-right-10 {
     margin: 0 10px;
 }
@@ -121,6 +125,10 @@ body {
 
 .w-40 {
     width: 40%!important;
+}
+
+.w-50 {
+    width: 50%!important;
 }
 
 .w-60 {
@@ -298,6 +306,13 @@ body {
 
 .base__relative {
     position: relative;
+}
+
+.bold__label {
+    font-size: 12px;
+    font-weight: 700;
+    margin-right: 3px;
+    cursor: pointer;
 }
 
 

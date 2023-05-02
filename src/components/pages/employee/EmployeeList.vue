@@ -319,6 +319,19 @@ export default {
         },
 
         /**
+         * Phương thức format gender
+         * @param img Giới tính
+         * @Author NDDung (31/07/2022)
+         */
+        formatAvatar(img) {
+            var employeeImg = 'images/';
+            if (img) {
+                employeeImg += img;
+            }
+            return employeeImg;
+        },
+
+        /**
          * Phương thức xử lý sự kiện chọn trang
          * @param item Số trang
          * @Author NDDung (31/07/2022)
@@ -723,7 +736,7 @@ export default {
                                 </BaseCheckBox>
                             </td>
                             <td>
-                                <BaseDownload :linkImg="dataLoadImg"> </BaseDownload>
+                                <BaseDownload :linkImg="formatAvatar(emp.Avatar)"> </BaseDownload>
                             </td>
                             <td class="tbEmployeeCode">{{ emp.EmployeeCode }}</td>
                             <td>{{ emp.EmployeeName }}</td>

@@ -14,10 +14,10 @@ export default {
 
         const { files, open, reset } = useFileDialog();
 
-        watch(files, (newFiles) => {
+        watch(files, async (newFiles) => {
             const file = newFiles[0];
             if (file) {
-                upload(file);
+                await upload(file);
 
                 emit('url-bind', linkImg);
             }
@@ -49,7 +49,11 @@ export default {
 
     watch: {
         urlLink(newVal) {
-            this.linkImg = newVal;
+            this.linkImg = 'images/' + newVal;
+            this.mountainFileRef = storageRef(this.storage, this.linkImg);
+            this.url = useStorageFile(this.mountainFileRef).url;
+        },
+        isReset() {
             this.mountainFileRef = storageRef(this.storage, this.linkImg);
             this.url = useStorageFile(this.mountainFileRef).url;
         }
@@ -67,13 +71,18 @@ export default {
         idUpload: {
             type: String,
             default: ''
+        },
+        isReset: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
         return {
             file: '',
             srcLink: '',
-            filename: ''
+            filename: '',
+            urlCheck: ''
         };
     }
 };
@@ -93,8 +102,8 @@ export default {
 <style lang="scss">
 .upload-container {
     display: flex;
-    height: 100px;
-    width: 100px;
+    height: 120px;
+    width: 80px;
     align-items: center;
     justify-content: center;
     border: 2px solid;
@@ -106,8 +115,8 @@ export default {
     .upload-main {
         cursor: pointer;
         display: flex;
-        height: 100px;
-        width: 100px;
+        height: 120px;
+        width: 80px;
         align-items: center;
         justify-content: center;
         margin: unset;
@@ -116,8 +125,8 @@ export default {
         transform: scale(3);
     }
     .upload-image {
-        width: 100px;
-        height: 100px;
+        width: 80px;
+        height: 120px;
         object-fit: cover;
     }
 }
