@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 using DATN.Common.HandleMethod;
 using DATN.Common.Resources;
 using DATN.Common;
+using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
+using DATN.Common.Constants;
+using Microsoft.IdentityModel.Tokens;
 
 namespace DATN.BLL.Services
 {
@@ -127,6 +131,56 @@ namespace DATN.BLL.Services
             {
                 throw new MISAException(ResourceVN.Error_InputNotValid, listMsgErrors);
             }
+        }
+
+        public string GetToken(string username, string password)
+        {
+            var employee = employeeRepository.GetAccount(username, password);
+            var tokenString = "";
+            if(!String.IsNullOrEmpty(employee.EmployeeId.ToString()) && employee.Role < 5){
+                string roleEmployee = "";
+                switch (employee.Role)
+                {
+                    case 0:
+                        roleEmployee = "employee";
+                        break;
+                    case 1:
+                        roleEmployee = "admin";
+                        break;
+                    case 2:
+                        roleEmployee = "manager"; 
+                        break;
+                    default:
+                        roleEmployee = "none";
+                        break;
+
+                }
+                var claims = new[]
+                {
+                    new Claim(JwtRegisteredClaimNames.Sub, employee.EmployeeId.ToString()),
+                    new Claim("name", username),
+                    new Claim("role", roleEmployee)
+                };
+
+                var secret = Constants.secretKey;
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
+                var token = new JwtSecurityToken(
+                    issuer: "myApp",
+                    audience: "myClient",
+                    claims: claims,
+                    expires: DateTime.UtcNow.AddHours(12),
+                    signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
+                );
+
+                // tạo string từ token
+                tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+                return tokenString;
+            }
+            else
+            {
+                return tokenString;
+            }
+            
         }
     }
 }

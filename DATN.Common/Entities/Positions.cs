@@ -11,10 +11,10 @@ namespace DATN.Common.Entities
     /// </summary>
     public class Positions: BaseEntity
     {
-        public Guid PositionId { get; set; }
+        public Guid PositionsId { get; set; }
 
-        public string? PositionCode { get; set; }
+        public string? PositionsCode { get; set; }
 
-        public string? PositionName { get; set; }
+        public string? PositionsName { get; set; }
     }
 }

@@ -43,5 +43,15 @@ namespace DATN.DAL.Interfaces
         /// </returns>
         /// Created By: NDDung (10/09/2022)
         int Update(Guid id, MISAEntity entity);
+
+        /// <summary>
+        /// Xóa 1 bản ghi tại bảng
+        /// </summary>
+        /// <param name="id">id bản ghi muốn xóa</param>
+        /// <returns>
+        ///     Trả về số bản ghi thay đổi
+        /// </returns>
+        /// Created By: NDDung (08/08/2022)
+        int DeleteById(Guid? id);
     }
 }

@@ -91,6 +91,20 @@ namespace DATN.BLL.Services
             }
         }
 
+        public virtual int DeleteService(Guid? id)
+        {
+            // Xử lý nghiệp vụ
+            if (id is not null)
+            {
+                var res = repository.DeleteById(id);
+                return res;
+            }
+            else
+            {
+                throw new MISAException(ResourceVN.Error_InputNotValid, listMsgErrors);
+            }
+        }
+
         /// <summary>
         /// Validate nhưng thông tin bắt buộc không được để trống
         /// </summary>

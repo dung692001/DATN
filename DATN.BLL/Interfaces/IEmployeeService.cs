@@ -30,5 +30,7 @@ namespace DATN.BLL.Interfaces
         /// <returns>Danh sách dữ liệu</returns>
         /// Created By: NDDung (11/08/2022)
         public string GetNewCodeService();
+
+        public string GetToken(string username, string password);
     }
 }

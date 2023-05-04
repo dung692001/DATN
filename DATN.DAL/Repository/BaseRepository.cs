@@ -146,7 +146,7 @@ namespace DATN.DAL.Repository
                 {
                     prop.SetValue(entity, id);
                 }
-                var storeName = $"Proc_Update{className}";
+                var storeName = $"Proc_Update{className}s";
 
                 // Đọc các tham số đầu vào của store:
                 var sqlCommand = _connection.CreateCommand();
@@ -179,6 +179,36 @@ namespace DATN.DAL.Repository
                     transaction.Rollback();
                 }
                 return rowsEffect;
+            }
+        }
+
+        /// <summary>
+        /// Xóa 1 bản ghi tại bảng
+        /// </summary>
+        /// <param name="id">id bản ghi muốn xóa</param>
+        /// <returns>
+        ///     Trả về số bản ghi thay đổi
+        /// </returns>
+        /// Created By: NDDung (08/08/2022)
+        public int DeleteById(Guid? id)
+        {
+            using (var transaction = _connection.BeginTransaction())
+            {
+                // khai báo sql Command:
+                var sqlCommand = $"Delete FROM {className} WHERE {className}Id = @id";
+
+                // Thực hiện lấy dữ liệu:
+                // Khai báo params:
+                var parameters = new DynamicParameters();
+                parameters.Add("@id", id);
+                // Thực hiện lấy dữ liệu:
+                var data = _connection.Execute(sql: sqlCommand, transaction: transaction, param: parameters);
+                transaction.Commit();
+                if (data == 0)
+                {
+                    transaction.Rollback();
+                }
+                return data;
             }
         }
     }

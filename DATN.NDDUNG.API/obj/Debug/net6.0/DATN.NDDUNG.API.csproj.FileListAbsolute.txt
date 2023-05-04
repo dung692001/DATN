@@ -37,3 +37,8 @@ D:\Documents\Documents\Đồ án tốt nghiệp\DATN\DATN.NDDUNG.API\DATN.NDDUNG
 D:\Documents\Documents\Đồ án tốt nghiệp\DATN\DATN.NDDUNG.API\DATN.NDDUNG.API\obj\Debug\net6.0\DATN.NDDUNG.API.pdb
 D:\Documents\Documents\Đồ án tốt nghiệp\DATN\DATN.NDDUNG.API\DATN.NDDUNG.API\obj\Debug\net6.0\DATN.NDDUNG.API.genruntimeconfig.cache
 D:\Documents\Documents\Đồ án tốt nghiệp\DATN\DATN.NDDUNG.API\DATN.NDDUNG.API\obj\Debug\net6.0\ref\DATN.NDDUNG.API.dll
+D:\Documents\Documents\Đồ án tốt nghiệp\DATN\DATN.NDDUNG.API\DATN.NDDUNG.API\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+D:\Documents\Documents\Đồ án tốt nghiệp\DATN\DATN.NDDUNG.API\DATN.NDDUNG.API\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Documents\Documents\Đồ án tốt nghiệp\DATN\DATN.NDDUNG.API\DATN.NDDUNG.API\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+D:\Documents\Documents\Đồ án tốt nghiệp\DATN\DATN.NDDUNG.API\DATN.NDDUNG.API\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+D:\Documents\Documents\Đồ án tốt nghiệp\DATN\DATN.NDDUNG.API\DATN.NDDUNG.API\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll

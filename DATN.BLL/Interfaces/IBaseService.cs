@@ -39,6 +39,6 @@ namespace DATN.BLL.Interfaces
         /// Created By: NDDung (07/09/2022)
         public int UpdateService(Guid id, MISAEntity entity);
 
-
+        public int DeleteService(Guid? id);
     }
 }

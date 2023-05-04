@@ -90,6 +90,20 @@ namespace DATN.NDDUNG.API.Controllers
             }
         }
 
+        [HttpGet("getUserToken")]
+        public IActionResult getUserToken(string username, string password)
+        {
+            try
+            {
+                var data = _service.GetToken(username, password);
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                return HandleException(ex);
+            }
+        }
+
         /// <summary>
         /// Xử lí exception 
         /// </summary>

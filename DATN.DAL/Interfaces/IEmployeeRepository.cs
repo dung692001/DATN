@@ -56,5 +56,13 @@ namespace DATN.DAL.Interfaces
         /// Created By: NDDung (02/08/2022)
         public bool CheckEmail(string email);
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public Employee GetAccount(string username, string password);
+
     }
 }

@@ -41,7 +41,8 @@ namespace DATN.DAL.Repository
             //var temp = _connection.QueryMultiple // Trả về 1 danh sách các bảng
             var res = new
             {
-                TotalPage = rowsEffect.Count(),
+                TotalRecord = TotalRecord,
+                TotalPage = TotalPage,
                 Data = rowsEffect,
 
             };
@@ -122,6 +123,17 @@ namespace DATN.DAL.Repository
                 }
                 return rowsEffect;
             }
+        }
+
+        public Employee GetAccount(string username, string password)
+        {
+            var dynamicParam = new DynamicParameters();
+            dynamicParam.Add("$account_username", username);
+            dynamicParam.Add("$accout_password", password);
+
+            List<Employee> dataQuery = (List<Employee>)_connection.Query<Employee>(sql: "Proc_GetAccountIdRole", param: dynamicParam, commandType: System.Data.CommandType.StoredProcedure);
+            Employee data = dataQuery.FirstOrDefault() ?? new Employee();
+            return data;
         }
 
         /// <summary>

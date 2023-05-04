@@ -74,6 +74,51 @@ namespace DATN.NDDUNG.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Sửa 1 bản ghi 
+        /// </summary>
+        /// <param name="id">Khóa chính của bản ghi</param>
+        /// <param name="entity">Thông tin bản ghi muốn sửa</param>
+        /// <returns>
+        ///     Nếu thành công trả về số bản ghi thay đổi và mã 200 
+        /// </returns>
+        /// Created By: NDDung (10/08/2022)
+        [HttpPut("{id}")]
+        public IActionResult Put(Guid id, MISAEntity entity)
+        {
+            try
+            {
+                var res = _service.UpdateService(id, entity);
+                return StatusCode(200, res);
+            }
+            catch (Exception ex)
+            {
+                return HandleException(ex);
+            }
+        }
+
+        /// <summary>
+        /// Xóa 1 bản ghi tại bảng
+        /// </summary>
+        /// <param name="id">id bản ghi muốn xóa</param>
+        /// <returns>
+        ///     Trả về số bản ghi thay đổi
+        /// </returns>
+        /// Created By: NDDung (10/08/2022)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id)
+        {
+            try
+            {
+                var data = _service.DeleteService(id);
+                return Ok(data);
+            }
+            catch (Exception ex)
+            {
+                return HandleException(ex);
+            }
+        }
+
 
         /// <summary>
         /// Xử lí exception 

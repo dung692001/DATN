@@ -95,11 +95,11 @@ namespace DATN.Common.Entities
         /// <summary>
         /// Ảnh đại diện
         /// </summary>
-        public string? Avatar { get; set; }
+        public Guid? Avatar { get; set; }
         /// <summary>
         /// Ảnh chấm công
         /// </summary>
-        public string? AvatarTimeKeeping { get; set; }
+        public Guid? AvatarTimeKeeping { get; set; }
         /// <summary>
         /// Tên nhân viên
         /// </summary>
@@ -120,6 +120,25 @@ namespace DATN.Common.Entities
         /// Số tài khoản ngân hàng
         /// </summary>
         public string? BankNumber { get; set; }
+        /// <summary>
+        /// Mã số thuế
+        /// </summary>
+        public string? TaxCode { get; set; }
+        /// <summary>
+        /// Mã số thuế
+        /// </summary>
+        public string? ContactName { get; set; }
+        /// <summary>
+        /// Mã số thuế
+        /// </summary>
+        public string? ContactNumber { get; set; }
+        /// <summary>
+        /// Mã số thuế
+        /// </summary>
+        public string? Password { get; set; }
+
+        public int? Role { get; set; }
+
 
     }
 }
