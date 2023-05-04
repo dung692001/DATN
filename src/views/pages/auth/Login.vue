@@ -13,6 +13,38 @@ const logoUrl = computed(() => {
 });
 </script>
 
+<script>
+import EmployeeApi from '../../../apis/EmployeeApi.js';
+import router from '@/router/index';
+export default {
+    methods: {
+        async signInOnClick(email, password) {
+            var currentWindow = this;
+            try {
+                if (email && password) {
+                    await EmployeeApi.getUserToken(email, password).then(
+                        (res) => {
+                            localStorage.setItem('token', res.data);
+                            //router.push({ path: '/src/components/pages/employee/employeeList' });
+                            router.push({ name: 'employeeList', params: {} });
+                            if (!res.data) {
+                                currentWindow.$store.state.isLoggedIn = false;
+                            }
+                            currentWindow.$store.state.isLoggedIn = true;
+                        },
+                        (err) => {
+                            console.log(err);
+                        }
+                    );
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    }
+};
+</script>
+
 <template>
     <div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
         <div class="flex flex-column align-items-center justify-content-center">
@@ -21,7 +53,7 @@ const logoUrl = computed(() => {
                 <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius: 53px">
                     <div class="text-center mb-5">
                         <img src="/demo/images/login/avatar.png" alt="Image" height="50" class="mb-3" />
-                        <div class="text-900 text-3xl font-medium mb-3">Welcome, Isabel!</div>
+                        <div class="text-900 text-3xl font-medium mb-3">Welcome!</div>
                         <span class="text-600 font-medium">Sign in to continue</span>
                     </div>
 
@@ -39,7 +71,7 @@ const logoUrl = computed(() => {
                             </div>
                             <a class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: var(--primary-color)">Forgot password?</a>
                         </div>
-                        <Button label="Sign In" class="w-full p-3 text-xl"></Button>
+                        <Button label="Sign In" class="w-full p-3 text-xl" @click="signInOnClick(email, password)"></Button>
                     </div>
                 </div>
             </div>
