@@ -1,7 +1,7 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
-
+import store from './store';
 import { VueFire, VueFireAuth } from 'vuefire';
 import { firebaseApp } from './firebase';
 
@@ -252,6 +252,7 @@ app.component('BaseUpload', BaseUpload);
 app.component('BaseDownload', BaseDownload);
 
 app.use(router, VueAxios, axios);
+app.use(store);
 app.use(VueFire, {
     firebaseApp,
     modules: [VueFireAuth()]

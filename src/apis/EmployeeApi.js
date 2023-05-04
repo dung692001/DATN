@@ -79,6 +79,16 @@ class EmployeeAPI {
     }
 
     /**
+     * Lấy nhân viên theo số bản ghi 1 trang
+     * @param {*} recordNumber Mã hoặc tên của nhân viên
+     * @returns
+     * author: Nguyễn Đăng Dũng (26/07/2022)
+     */
+    async getUserToken(email, password) {
+        return await BaseAPIConfig.get(`${this.controller}/getUserToken?username=${email}&password=${password}`);
+    }
+
+    /**
      * Export excel
      * @returns
      * author: Nguyễn Đăng Dũng (15/08/2022)
