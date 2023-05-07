@@ -23,5 +23,34 @@ namespace DATN.BLL.Services
         {
             departmentRepository = repository;
         }
+
+        /// <summary>
+        /// Hàm phân trang tìm kiếm
+        /// </summary>
+        /// <param name="pageSize">Mã nhân viên</param>
+        /// <param name="pageNumber">Mã nhân viên</param>
+        /// <param name="employeeFilter">Mã nhân viên</param>
+        /// <returns>
+        ///     Thông tin mà employeeResponsitory.filterEmployee trả về
+        /// </returns>
+        /// Created By: NDDung (10/08/2022)
+        public object FilterService(int pageSize, int pageNumber, string? employeeFilter)
+        {
+            if (pageSize == 0)
+            {
+                pageSize = 100000;
+            }
+            if (pageNumber == 0)
+            {
+                pageNumber = 1;
+            }
+            if (employeeFilter == null)
+            {
+                employeeFilter = "";
+            }
+            var res = departmentRepository.FilterDepartment(pageSize, pageNumber, employeeFilter);
+            return res;
+
+        }
     }
 }

@@ -12,6 +12,14 @@ namespace DATN.Common.Entities
     public class Organization:BaseEntity
     {
         public Guid OrganizationId { get; set; }
+        /// <summary>
+        /// Thông tin phòng ban
+        /// </summary>
+        public Guid DepartmentId { get; set; }
+        /// <summary>
+        /// Tên nhân viên
+        /// </summary>
+        public string? DepartmentName { get; set; }
         public string? OrganizationCode { get; set; }
 
         public string? OrganizationName { get; set; }
