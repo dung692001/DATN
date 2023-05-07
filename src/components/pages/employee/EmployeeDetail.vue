@@ -171,12 +171,6 @@ export default {
                     this.popupNotification.push(resourceVN.ValidateError_EmployeeFullNameNotEmpty);
                     valid = false;
                 }
-                // Kiểm tra đơn vị có đang để trống hay không
-                if (!this.employee.DepartmentName) {
-                    this.inputRequire.push('inputDepartment');
-                    this.popupNotification.push(resourceVN.ValidateError_DepartmentCodeNotEmpty);
-                    valid = false;
-                }
 
                 // Kiểm tra ngày có đúng định dạng hay không
                 if (this.checkDate(this.employee.DateOfBirth)) {
@@ -706,28 +700,6 @@ export default {
                             </div>
 
                             <div class="dialog__row">
-                                <!-- Combobox đơn vị -->
-                                <BaseCombobox
-                                    ref="inputDepartment"
-                                    :label="'Đơn vị'"
-                                    :tabIndex="4"
-                                    :inputRequire="true"
-                                    :inputIcon="'icon__dropdown'"
-                                    :dropdownTitleLeft="'Mã đơn vị'"
-                                    :dropdownTitleRight="'Tên đơn vị'"
-                                    :dataSelectedText="employee.DepartmentName"
-                                    :dataSelectedId="employee.DepartmentId"
-                                    :data="departments"
-                                    :idData="'DepartmentId'"
-                                    :codeData="'DepartmentCode'"
-                                    :nameData="'DepartmentName'"
-                                    :hasTooltip="true"
-                                    @setDepartmentName="setDepartmentName"
-                                >
-                                </BaseCombobox>
-                            </div>
-
-                            <div class="dialog__row">
                                 <!-- Combobox khối dự án -->
                                 <BaseCombobox
                                     ref="inputOrganization"
@@ -775,6 +747,19 @@ export default {
                                 <BaseInput tabIndex="7" :labelTitle="'Điện thoại di động'" :label="'ĐT di động'" :size="'w-50 p-r-6'" :maxLengthInput="50" v-model="employee.PhoneNumber"> </BaseInput>
 
                                 <BaseInput tabIndex="8" :label="'Mã số thuế'" :size="'w-50 p-r-6'" :maxLengthInput="50" v-model="employee.TaxCode"> </BaseInput>
+                            </div>
+                            <div class="dialog__row">
+                                <BaseInput
+                                    tabIndex="16"
+                                    :label="'Office Email'"
+                                    :size="'p-r-6'"
+                                    :inputRequireValidate="true"
+                                    @setToastMessage="setToastMessage"
+                                    @showToastMessage="showToastMessage"
+                                    :maxLengthInput="100"
+                                    v-model="employee.OfficeEmail"
+                                >
+                                </BaseInput>
                             </div>
                         </div>
                         <div class="dialog__content__right">
@@ -849,9 +834,9 @@ export default {
                         <div class="dialog__row">
                             <BaseInput tabIndex="19" :label="'Số tài khoản ngân hàng (ACB)'" :size="'w-25 p-r-6'" :maxLengthInput="25" v-model="employee.BankNumber"> </BaseInput>
 
-                            <BaseInput tabIndex="18" :label="'Người liên hệ khẩn cấp'" :size="'w-25 p-r-6'" :maxLengthInput="250" v-model="employee.BankName"> </BaseInput>
+                            <BaseInput tabIndex="18" :label="'Người liên hệ khẩn cấp'" :size="'w-25 p-r-6'" :maxLengthInput="250" v-model="employee.ContactName"> </BaseInput>
 
-                            <BaseInput tabIndex="19" :label="'Số điện thoại liên lạc khẩn cấp'" :size="'w-25 p-r-6'" :maxLengthInput="250" v-model="employee.BankBranch"> </BaseInput>
+                            <BaseInput tabIndex="19" :label="'Số điện thoại liên lạc khẩn cấp'" :size="'w-25 p-r-6'" :maxLengthInput="250" v-model="employee.ContactNumber"> </BaseInput>
                         </div>
                     </div>
                 </div>
@@ -882,7 +867,7 @@ export default {
             :iconType="popupType"
             :buttonType="popupButtonType"
             @showPopup="showEmployeeDetailPopup"
-            @closeEmployeeDetail="btnCloseOnClick"
+            @closeDetail="btnCloseOnClick"
             @saveEmployee="btnSaveOnClick(this.saveMode.saveDefault)"
         >
         </BasePopup>

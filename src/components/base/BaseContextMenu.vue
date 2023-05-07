@@ -13,6 +13,10 @@ export default {
         // Khóa chính nhân viên truyền vào để mở ra form nhân bản
         employee: {
             type: Object
+        },
+
+        typeContext: {
+            type: String
         }
     },
     methods: {
@@ -21,7 +25,11 @@ export default {
          * @Author Nguyễn Đăng Dũng (25/07/2022)
          */
         btnDeleteOnClick() {
-            this.popupNotification = Resource.messageDelete(this.employeeCode);
+            if (this.typeContext == 'employee') {
+                this.popupNotification = Resource.messageDelete(this.employeeCode);
+            } else {
+                this.popupNotification = 'Bạn có thực sự muốn xóa bản ghi không?';
+            }
             this.$emit('showWarningPopup', true, this.popupNotification, deleteMode.single);
         },
 

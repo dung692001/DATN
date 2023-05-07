@@ -14,6 +14,11 @@ const router = createRouter({
                     component: () => import('@/components/pages/employee/EmployeeList.vue')
                 },
                 {
+                    path: '/src/components/pages/department/departmentList',
+                    name: 'departmentList',
+                    component: () => import('@/components/pages/department/DepartmentList.vue')
+                },
+                {
                     path: '/uikit/employee',
                     name: 'employee',
                     component: () => import('@/views/uikit/Employee.vue')

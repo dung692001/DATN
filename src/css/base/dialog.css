@@ -223,3 +223,8 @@
     margin-right: 3px;
     cursor: pointer;
 }
+
+.width-600{
+    width: 600px;
+    min-width: 600px;
+}

@@ -762,7 +762,14 @@ export default {
                                 </div>
                             </td>
                             <td class="table__popup">
-                                <BaseContextMenu :class="{ isShowBlock: checkShowContextMenu(emp.EmployeeId) }" :employeeCode="emp.EmployeeCode" :employee="emp" @showWarningPopup="showWarningPopup" @btnCloneOnClick="btnCloneOnClick">
+                                <BaseContextMenu
+                                    :class="{ isShowBlock: checkShowContextMenu(emp.EmployeeId) }"
+                                    :typeContext="employee"
+                                    :employeeCode="emp.EmployeeCode"
+                                    :employee="emp"
+                                    @showWarningPopup="showWarningPopup"
+                                    @btnCloneOnClick="btnCloneOnClick"
+                                >
                                 </BaseContextMenu>
                             </td>
                         </tr>

@@ -1,7 +1,8 @@
 export const resourceVN = {
     ValidateError_EmployeeCodeNotEmpty: 'Mã không được để trống.',
     ValidateError_EmployeeFullNameNotEmpty: 'Tên không được để trống.',
-    ValidateError_DepartmentCodeNotEmpty: 'Đơn vị không được để trống.',
+    ValidateError_DepartmentCodeNotEmpty: 'Mã đơn vị không được để trống.',
+    ValidateError_DepartmentFullNameNotEmpty: 'Tên đơn vị không được để trống.',
     DataChanged_DoYouWantToSave: 'Dữ liệu đã bị thay đổi. Bạn có muốn cất không?',
     ValiedateError_EmployeeCodeIsExist: 'Mã đã tồn tại vui lòng nhập mã khác!',
     DeleteMultiEmployee: 'Bạn có thật sự muốn xóa những nhân viên đã chọn không?',

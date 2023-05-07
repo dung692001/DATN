@@ -12,6 +12,7 @@ const model = ref([
         label: 'UI Components',
         items: [
             { label: 'DS Nhân viên', icon: 'pi pi-fw pi-user', to: '/src/components/pages/employee/employeeList' },
+            { label: 'Phòng ban', icon: 'pi pi-fw pi-user', to: '/src/components/pages/department/departmentList' },
             { label: 'Nhân viên', icon: 'pi pi-fw pi-user', to: '/uikit/employee' },
             { label: 'Form Layout', icon: 'pi pi-fw pi-id-card', to: '/uikit/formlayout' },
             { label: 'Input', icon: 'pi pi-fw pi-check-square', to: '/uikit/input' },

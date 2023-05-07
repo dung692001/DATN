@@ -2,7 +2,7 @@
 import BaseButton from './BaseButton.vue';
 export default {
     name: 'BaseDate',
-    emits: ['showPopup', 'confirmDelete', 'closeEmployeeDetail', 'saveEmployee'],
+    emits: ['showPopup', 'confirmDelete', 'closeDetail', 'saveEmployee'],
     components: {
         BaseButton
     },
@@ -20,7 +20,7 @@ export default {
          * @Author ND Dũng (25/07/2022)
          */
         btnCloseEmployeeDetail() {
-            this.$emit('closeEmployeeDetail');
+            this.$emit('closeDetail');
         },
 
         /**
