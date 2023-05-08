@@ -505,18 +505,6 @@ export default {
             <div class="table">
                 <table id="tbDepartmentList">
                     <thead>
-                        <th class="w-20px">
-                            <BaseCheckBox
-                                @click="tickAllCheckBox()"
-                                :class="{
-                                    checkbox: true,
-                                    'checkbox--checked icon icon__checkbox': tickAllCheckBoxSelected()
-                                }"
-                                :isShowTick="isShowTick"
-                            >
-                            </BaseCheckBox>
-                            <!-- <input type="checkbox" class="checkbox__input" /> -->
-                        </th>
                         <th class="w-125px">MÃ PHÒNG BAN</th>
                         <th class="w-200px">TÊN PHÒNG BAN</th>
                         <th class="w-100px table__center">CHỨC NĂNG</th>
@@ -534,17 +522,6 @@ export default {
                             @click="selectedRow(emp.DepartmentId)"
                             @dblclick="btnEditOnClick(emp)"
                         >
-                            <td>
-                                <BaseCheckBox
-                                    @click="tickCheckBox(index, emp.DepartmentId)"
-                                    :class="{
-                                        checkbox: true,
-                                        'checkbox--checked icon icon__checkbox row--selected': tickCheckBoxSelected(index, emp.DepartmentId)
-                                    }"
-                                    :isShowTick="isShowTick"
-                                >
-                                </BaseCheckBox>
-                            </td>
                             <td class="tbDepartmentCode">{{ emp.DepartmentCode }}</td>
                             <td>{{ emp.DepartmentName }}</td>
                             <td class="table__center">
