@@ -19,6 +19,16 @@ const router = createRouter({
                     component: () => import('@/components/pages/department/DepartmentList.vue')
                 },
                 {
+                    path: '/src/components/pages/organization/organizationList',
+                    name: 'organizationList',
+                    component: () => import('@/components/pages/organization/OrganizationList.vue')
+                },
+                {
+                    path: '/src/components/pages/positions/positionsList',
+                    name: 'positionsList',
+                    component: () => import('@/components/pages/positions/PositionsList.vue')
+                },
+                {
                     path: '/uikit/employee',
                     name: 'employee',
                     component: () => import('@/views/uikit/Employee.vue')

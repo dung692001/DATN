@@ -1,23 +1,25 @@
 <script>
+import OrganizationApi from '../../../apis/OrganizationApi.js';
 import DepartmentApi from '../../../apis/DepartmentApi.js';
 import { resourceVN } from '../../../common/Resource.js';
 import { Resource } from '../../../common/Resource.js';
 export default {
-    name: 'DepartmentDetail',
-    emits: ['showDepartmentDetailDialog', 'loadDataByFilter', 'setToastMessage', 'showToastMessage', 'showToastMessage'],
+    name: 'OrganizationDetail',
+    emits: ['showOrganizationDetailDialog', 'loadDataByFilter', 'setToastMessage', 'showToastMessage', 'showToastMessage'],
     /**
      * Phương thức loadData khi lần đầu mở form
      * @Author NDDung (23/07/2022)
      */
     mounted() {
+        this.getAllDepartment();
         // nếu là mode edit thì thực hiện lấy thông tin của nhân viên
         if (this.formMode === 1) {
-            this.getDepartment(this.departmentSelectedId);
+            this.getOrganization(this.organizationSelectedId);
         }
         // nếu là mode clone thì thực hiện lấy thông tin của nhân viên sau đó gán mã mơi
         if (this.formMode === 2) {
-            this.getDepartment(this.departmentSelectedId);
-            this.department.DepartmentCode = '';
+            this.getOrganization(this.organizationSelectedId);
+            this.organization.OrganizationCode = '';
             this.getNewCode();
         }
     },
@@ -27,9 +29,9 @@ export default {
          * @Author NDDung (23/07/2022)
          */
         btnCloseOnClick() {
-            // showDepartmentDetailDialog chỉ là cái để tham chiếu đến @showDepartmentDetailDialog ở cha
+            // showOrganizationDetailDialog chỉ là cái để tham chiếu đến @showOrganizationDetailDialog ở cha
 
-            this.$emit('showDepartmentDetailDialog', false);
+            this.$emit('showOrganizationDetailDialog', false);
         },
 
         /**
@@ -49,7 +51,7 @@ export default {
                     if (currentWindow.formMode == 0 || currentWindow.formMode == 2) {
                         this.setToastMessage(Resource.messageSuccess('Thêm'), 'success', 2000);
                         // Thực hiện thêm mới
-                        DepartmentApi.saveDepartmentByAdd(currentWindow.department).then(
+                        OrganizationApi.saveOrganizationByAdd(currentWindow.organization).then(
                             () => {
                                 // Nếu thêm mới thành công hiện thị toast msg thông báo thành công:
                                 currentWindow.showToastMessage();
@@ -58,13 +60,13 @@ export default {
                                 // Nếu ấn vào cất
                                 if (saveMode == 0) {
                                     // Đóng form thêm mới
-                                    currentWindow.$emit('showDepartmentDetailDialog', false);
+                                    currentWindow.$emit('showOrganizationDetailDialog', false);
                                 }
                                 // Nếu ấn vào cất và thêm
                                 else {
                                     // Đóng form thêm mới
-                                    currentWindow.$emit('showDepartmentDetailDialog', false);
-                                    this.department = {};
+                                    currentWindow.$emit('showOrganizationDetailDialog', false);
+                                    this.organization = {};
                                     currentWindow.$emit('btnAddOnClick');
                                 }
                             },
@@ -77,7 +79,7 @@ export default {
                     } else {
                         currentWindow.setToastMessage(Resource.messageSuccess('Sửa'), 'success', 2000);
                         // Thực hiên sửa nhân viên
-                        DepartmentApi.saveDepartmentByEdit(currentWindow.departmentSelectedId, currentWindow.department).then(
+                        OrganizationApi.saveOrganizationByEdit(currentWindow.organizationSelectedId, currentWindow.organization).then(
                             () => {
                                 // Nếu sửa thành công hiện thị toast msg thông báo thành công:
                                 currentWindow.showToastMessage();
@@ -86,13 +88,13 @@ export default {
 
                                 if (saveMode == 0) {
                                     // Đóng form thêm mới
-                                    currentWindow.$emit('showDepartmentDetailDialog', false);
+                                    currentWindow.$emit('showOrganizationDetailDialog', false);
                                 }
                                 // Nếu ấn vào cất và thêm
                                 else {
                                     // Đóng form thêm mới
-                                    currentWindow.$emit('showDepartmentDetailDialog', false);
-                                    this.department = {};
+                                    currentWindow.$emit('showOrganizationDetailDialog', false);
+                                    this.organization = {};
                                     currentWindow.$emit('btnAddOnClick');
                                 }
                             },
@@ -114,7 +116,7 @@ export default {
          * @param isShow biến true false để đóng mở popup
          * @Author NDDung (25/07/2022)
          */
-        showDepartmentDetailPopup(isShow) {
+        showOrganizationDetailPopup(isShow) {
             try {
                 if (isShow == false) {
                     if (this.popupType == 'icon__error' || (this.popupType == 'icon__warning' && this.inputRequire.length > 0)) {
@@ -137,15 +139,15 @@ export default {
                 this.inputRequire = [];
                 this.popupNotification = [];
                 // Kiểm tra mã có đang để trống hay không
-                if (!this.department.DepartmentCode) {
+                if (!this.organization.OrganizationCode) {
                     this.inputRequire.push('inputCode');
-                    this.popupNotification.push(resourceVN.ValidateError_DepartmentCodeNotEmpty);
+                    this.popupNotification.push(resourceVN.ValidateError_OrganizationCodeNotEmpty);
                     valid = false;
                 }
                 // Kiểm tra tên có đang để trống hay không
-                if (!this.department.DepartmentName) {
+                if (!this.organization.OrganizationName) {
                     this.inputRequire.push('inputName');
-                    this.popupNotification.push(resourceVN.ValidateError_DepartmentFullNameNotEmpty);
+                    this.popupNotification.push(resourceVN.ValidateError_OrganizationNameNotEmpty);
                     valid = false;
                 }
 
@@ -165,7 +167,7 @@ export default {
         showErrorPopup() {
             this.popupType = 'icon__error';
             this.popupButtonType = 'button__error';
-            this.showDepartmentDetailPopup(true);
+            this.showOrganizationDetailPopup(true);
         },
 
         /**
@@ -193,19 +195,24 @@ export default {
         },
 
         /**
-         * Phương thức get department từ departmentId
-         * @param departmentId: id truyền vào để lấy toàn bộ thông tin nhân viên
+         * Phương thức get organization từ organizationId
+         * @param organizationId: id truyền vào để lấy toàn bộ thông tin nhân viên
          * @Author NDDung (25/07/2022)
          */
-        async getDepartment(departmentId) {
+        async getOrganization(organizationId) {
             let currentWindow = this;
             try {
                 this.$refs['inputCode'].focusInput();
-                await DepartmentApi.getDepartmentById(departmentId).then(
+                await OrganizationApi.getOrganizationById(organizationId).then(
                     (res) => {
-                        currentWindow.department = res.data;
+                        currentWindow.organization = res.data;
                         setTimeout(function () {
-                            currentWindow.departmentTemp = JSON.stringify(currentWindow.department);
+                            for (let item of currentWindow.lstDepartment) {
+                                if (currentWindow.organization.DepartmentId == item.DepartmentId) {
+                                    currentWindow.organization.DepartmentName = item.DepartmentName;
+                                }
+                            }
+                            currentWindow.organizationTemp = JSON.stringify(currentWindow.organization);
                         }, 100);
                     },
                     (err) => {
@@ -222,16 +229,16 @@ export default {
          * @Author NDDung (29/07/2022)
          */
         checkDataChange() {
-            if (JSON.stringify(this.department) == JSON.stringify(this.departmentTemp)) {
-                this.$emit('showDepartmentDetailDialog', false);
-                this.department = {};
+            if (JSON.stringify(this.organization) == JSON.stringify(this.organizationTemp)) {
+                this.$emit('showOrganizationDetailDialog', false);
+                this.organization = {};
                 this.btnCloseOnClick();
             } else {
                 this.popupNotification = [];
                 this.popupNotification.push(resourceVN.DataChanged_DoYouWantToSave);
                 this.popupType = 'icon__info';
                 this.popupButtonType = 'button__info';
-                this.showDepartmentDetailPopup(true);
+                this.showOrganizationDetailPopup(true);
             }
         },
 
@@ -254,10 +261,36 @@ export default {
         },
 
         /**
-         * Phương thức show error input
-         * @Author NDDung (20/08/2022)
+         * Phương thức set các giá trị của organization
+         * @value organization đã chọn
+         * @Author NDDung (03/08/2022)
          */
-        showErrorInput() {}
+        setDepartmentName(value) {
+            if (value != '') {
+                this.organization.DepartmentId = value.DepartmentId;
+                this.organization.DepartmentName = value.DepartmentName;
+            }
+        },
+        /**
+         * Phương thức lấy phòng ban
+         * @Author NDDung (28/07/2022)
+         */
+        getAllDepartment() {
+            let currentWindow = this;
+            try {
+                DepartmentApi.getAllDepartment().then(
+                    (res) => {
+                        currentWindow.lstDepartment = res.data;
+                    },
+                    (err) => {
+                        console.log(err);
+                    }
+                );
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
         // end methods
     },
     props: {
@@ -266,7 +299,7 @@ export default {
             type: Boolean
         },
         // id của nhân viên đang được chọn
-        departmentSelectedId: {
+        organizationSelectedId: {
             type: String
         },
         // lưu mode của dialog là thêm hay sửa
@@ -276,20 +309,22 @@ export default {
         }
     },
     watch: {
-        departmentSelectedId: function (value) {
+        organizationSelectedId: function (value) {
+            this.getAllDepartment();
             if (value) {
-                this.getDepartment(this.departmentSelectedId);
+                this.getOrganization(this.organizationSelectedId);
             }
         },
-        departmentCode: function (value) {
-            this.department.departmentCode = value;
+        organizationCode: function (value) {
+            this.organization.organizationCode = value;
         }
     },
     data() {
         return {
-            // object lưu 1 nhân viên được truyền vào từ departmentList
-            department: {},
-
+            // object lưu 1 nhân viên được truyền vào từ organizationList
+            organization: {},
+            //Biến lưu danh sách phòng ban
+            lstDepartment: [],
             // biến kiểu bool lưu việc đóng mở popup
             isShowPopup: false,
             // biến lưu text cho pop up thông báo
@@ -299,7 +334,7 @@ export default {
             // array chứa các input require chưa nhập
             inputRequire: [],
             // json chứa thông tin của nhân viên để kiểm tra dữ liệu đã thay đổi Chưa
-            departmentTemp: {},
+            organizationTemp: {},
             // kiểu của popup (ví dụ success, error)
             popupType: null,
             // kiểu nút của popup
@@ -322,11 +357,11 @@ export default {
 </script>
 
 <template>
-    <div id="dlgDepartmentDetail" class="dialog__popup" @keydown="hanldeOnKeyDown" @keyup="hanldeOnKeyUp" v-bind:class="{ isShowDialog: true }">
+    <div id="dlgOrganizationDetail" class="dialog__popup" @keydown="hanldeOnKeyDown" @keyup="hanldeOnKeyUp" v-bind:class="{ isShowDialog: true }">
         <div class="dialog width-600">
             <div class="dialog__header">
                 <div class="dialog__title flex">
-                    <div class="title__popup">{{ formMode != 1 ? 'Thêm Phòng Ban' : 'Sửa Phòng Ban' }}</div>
+                    <div class="title__popup">{{ formMode != 1 ? 'Thêm Dự Án' : 'Sửa Dự Án' }}</div>
                 </div>
                 <div class="dialog__header__button">
                     <div class="border__icon32 tooltip-title-dialog" tooltip-content="Giúp (F1)">
@@ -343,13 +378,36 @@ export default {
                         <div class="dialog__content__left">
                             <div class="dialog__row">
                                 <button tabIndex="1" @keyup="returnLastTabIndex" class="button_hidden"></button>
-                                <BaseInput ref="inputCode" tabIndex="2" :label="'Mã'" :inputRequire="true" :size="'p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="department.DepartmentCode"> </BaseInput>
+                                <BaseInput ref="inputCode" tabIndex="2" :label="'Mã'" :inputRequire="true" :size="'p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="organization.OrganizationCode"> </BaseInput>
                             </div>
                         </div>
                         <div class="dialog__content__right">
                             <div class="dialog__row">
-                                <BaseInput ref="inputName" :label="'Tên'" tabIndex="3" :inputRequire="true" :size="''" :maxLengthInput="100" :hasTooltip="true" v-model="department.DepartmentName"> </BaseInput>
+                                <BaseInput ref="inputName" :label="'Tên'" tabIndex="3" :inputRequire="true" :size="''" :maxLengthInput="100" :hasTooltip="true" v-model="organization.OrganizationName"> </BaseInput>
                             </div>
+                        </div>
+                    </div>
+                    <div class="dialog__content__down">
+                        <div class="dialog__row">
+                            <!-- Combobox khối dự án -->
+                            <BaseCombobox
+                                ref="inputOrganization"
+                                :label="'Phòng Ban'"
+                                :tabIndex="5"
+                                :inputRequire="true"
+                                :inputIcon="'icon__dropdown'"
+                                :dropdownTitleLeft="'Mã phòng ban'"
+                                :dropdownTitleRight="'Tên phòng ban'"
+                                :dataSelectedText="organization.DepartmentName"
+                                :dataSelectedId="organization.DepartmentId"
+                                :data="lstDepartment"
+                                :idData="'DepartmentId'"
+                                :codeData="'DepartmentCode'"
+                                :nameData="'DepartmentName'"
+                                :hasTooltip="true"
+                                @setDepartmentName="setDepartmentName"
+                            >
+                            </BaseCombobox>
                         </div>
                     </div>
                 </div>
@@ -379,9 +437,9 @@ export default {
             :popupText="popupNotification"
             :iconType="popupType"
             :buttonType="popupButtonType"
-            @showPopup="showDepartmentDetailPopup"
+            @showPopup="showOrganizationDetailPopup"
             @closeDetail="btnCloseOnClick"
-            @saveDepartment="btnSaveOnClick(this.saveMode.saveDefault)"
+            @saveOrganization="btnSaveOnClick(this.saveMode.saveDefault)"
         >
         </BasePopup>
     </div>

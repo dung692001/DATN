@@ -1,15 +1,13 @@
 <script>
-import PositionsApi from '../../../apis/PositionsApi.js';
-import PositionsDetail from './PositionsDetail.vue';
-//import axios from 'axios';
+import OrganizationApi from '../../../apis/OrganizationApi.js';
+import OrganizationDetail from './OrganizationDetail.vue';
 import { resourceVN } from '../../../common/Resource.js';
 import { eventMode } from '../../../common/Enum.js';
 import { deleteMode } from '../../../common/Enum.js';
-//import { myApi } from '../../../common/Resource.js';
 export default {
-    name: 'PositionsList',
+    name: 'OrganizationList',
     components: {
-        PositionsDetail
+        OrganizationDetail
     },
 
     //GĐ 2: created (setup)
@@ -29,10 +27,10 @@ export default {
             }
             try {
                 this.isShowLoading = false;
-                await PositionsApi.loadDataByFilter(this.recordNumber, this.currentPage, currentWindow.currentSearchValue).then(
+                await OrganizationApi.loadDataByFilter(this.recordNumber, this.currentPage, currentWindow.currentSearchValue).then(
                     (res) => {
                         currentWindow.totalPage = res.data.TotalPage;
-                        currentWindow.positions = res.data.Data;
+                        currentWindow.organizations = res.data.Data;
                         currentWindow.totalRecord = res.data.TotalRecord;
                         currentWindow.isShowLoading = false;
                     },
@@ -52,17 +50,17 @@ export default {
         tickAllCheckBox() {
             try {
                 let i = (this.currentPage - 1) * this.recordNumber;
-                let maxNumberInPage = (this.currentPage - 1) * this.recordNumber + this.positions.length;
+                let maxNumberInPage = (this.currentPage - 1) * this.recordNumber + this.organizations.length;
                 let j = 0;
-                if (this.countCheckBoxCheckedInPage != this.positions.length) {
+                if (this.countCheckBoxCheckedInPage != this.organizations.length) {
                     for (i; i < maxNumberInPage; i++, j++) {
                         if (this.arrayCheckBoxSelectedId[i] != null) {
                             this.countIdInArray = this.countIdInArray - 1;
                         }
                         this.countIdInArray = this.countIdInArray + 1;
-                        this.arrayCheckBoxSelectedId[i] = this.positions[j].PositionsId;
+                        this.arrayCheckBoxSelectedId[i] = this.organizations[j].OrganizationId;
                     }
-                    this.countCheckBoxCheckedInPage = this.positions.length;
+                    this.countCheckBoxCheckedInPage = this.organizations.length;
                 } else {
                     for (i; i < maxNumberInPage; i++) {
                         this.arrayCheckBoxSelectedId[i] = null;
@@ -86,14 +84,14 @@ export default {
             try {
                 this.countCheckBoxCheckedInPage = 0;
                 let i = (this.currentPage - 1) * this.recordNumber;
-                let maxNumberInPage = (this.currentPage - 1) * this.recordNumber + this.positions.length;
+                let maxNumberInPage = (this.currentPage - 1) * this.recordNumber + this.organizations.length;
                 for (i; i < maxNumberInPage; i++) {
                     if (this.arrayCheckBoxSelectedId[i] != null) {
                         this.countCheckBoxCheckedInPage = this.countCheckBoxCheckedInPage + 1;
                     }
                 }
 
-                if (this.countCheckBoxCheckedInPage == this.positions.length) {
+                if (this.countCheckBoxCheckedInPage == this.organizations.length) {
                     return true;
                 } else {
                     return false;
@@ -154,8 +152,8 @@ export default {
          * Phương thức chuẩn bị xóa nhiều
          * @Author NDDung (17/08/2022)
          */
-        prepareDeleteMultidPositionss() {
-            this.showWarningPopup(true, resourceVN.DeleteMultiposition, deleteMode.multi);
+        prepareDeleteMultidOrganizations() {
+            this.showWarningPopup(true, resourceVN.DeleteMultiorganization, deleteMode.multi);
         },
 
         /**
@@ -172,7 +170,7 @@ export default {
          */
         btnExportExcel() {
             try {
-                PositionsApi.exportposition().then(
+                OrganizationApi.exportorganization().then(
                     () => {},
                     (err) => {
                         console.log(err);
@@ -191,7 +189,7 @@ export default {
          * @Author NDDung (17/08/2022)
          */
         toggleRowSelected(depatmentId) {
-            if (this.positionRowId == depatmentId) {
+            if (this.organizationRowId == depatmentId) {
                 return true;
             } else {
                 return false;
@@ -226,10 +224,10 @@ export default {
          * @Author NDDung (17/08/2022)
          */
         selectedRow(depatmentId) {
-            if (this.positionRowId == depatmentId) {
-                this.positionRowId = '';
+            if (this.organizationRowId == depatmentId) {
+                this.organizationRowId = '';
             } else {
-                this.positionRowId = depatmentId;
+                this.organizationRowId = depatmentId;
             }
         },
 
@@ -238,33 +236,33 @@ export default {
          * @Author NDDung (23/07/2022)
          */
         btnAddOnClick() {
-            this.positionSelectedId = '';
-            this.showPositionsDetailDialog(true);
+            this.organizationSelectedId = '';
+            this.showOrganizationDetailDialog(true);
             this.formMode = eventMode.add;
         },
 
         /**
          * Hiển thị form chi tiết nhân viên khi ấn nút sửa tại dòng dữ liệu
-         * @param position thông tin nhân viên
+         * @param organization thông tin nhân viên
          * @Author NDDung (23/07/2022)
          */
-        btnEditOnClick(position) {
-            this.showPositionsDetailDialog(true);
-            this.positionSelectedId = position.PositionsId;
-            this.positionContextMenuId = '';
+        btnEditOnClick(organization) {
+            this.showOrganizationDetailDialog(true);
+            this.organizationSelectedId = organization.OrganizationId;
+            this.organizationContextMenuId = '';
             this.formMode = eventMode.edit;
         },
 
         /**
          * Hiển thị viền bao quanh nút context menu
-         * @param positionId Khóa chính của nhân viên
+         * @param organizationId Khóa chính của nhân viên
          * @Author NDDung (25/07/2022)
          */
-        btnContextMenuOnClick(positionId) {
-            if (this.positionContextMenuId == positionId) {
-                this.positionContextMenuId = '';
+        btnContextMenuOnClick(organizationId) {
+            if (this.organizationContextMenuId == organizationId) {
+                this.organizationContextMenuId = '';
             } else {
-                this.positionContextMenuId = positionId;
+                this.organizationContextMenuId = organizationId;
             }
         },
 
@@ -273,8 +271,8 @@ export default {
          * @param depatmentId Khóa chính của nhân viên
          * @Author NDDung (25/07/2022)
          */
-        checkShowContextMenu(positionId) {
-            if (this.positionContextMenuId == positionId) {
+        checkShowContextMenu(organizationId) {
+            if (this.organizationContextMenuId == organizationId) {
                 return true;
             } else {
                 return false;
@@ -283,13 +281,13 @@ export default {
 
         /**
          * Phương thức xử lý sự kiện khi ấn nút nhân bản
-         * @param position Thông tin của nhân viên
+         * @param organization Thông tin của nhân viên
          * @Author NDDung (03/08/2022)
          */
-        btnCloneOnClick(position) {
-            this.showPositionsDetailDialog(true);
-            this.depatmentSelectedId = position.DepatmentId;
-            this.positionContextMenuId = '';
+        btnCloneOnClick(organization) {
+            this.showOrganizationDetailDialog(true);
+            this.depatmentSelectedId = organization.DepatmentId;
+            this.organizationContextMenuId = '';
             this.formMode = eventMode.clone;
         },
 
@@ -298,7 +296,7 @@ export default {
          * @param isShowDialog isShowDialog = true mở form và false là đóng form
          * @Author NDDung (23/07/2022)
          */
-        showPositionsDetailDialog(isShowDialog) {
+        showOrganizationDetailDialog(isShowDialog) {
             this.isShowDialog = isShowDialog;
         },
 
@@ -310,7 +308,7 @@ export default {
          */
         showRecordInPageDropdown(isShow, value) {
             this.isShowDropdown = isShow;
-            this.$refs.inputPositions.isRorateIcon = false;
+            this.$refs.inputOrganization.isRorateIcon = false;
             if (value != '') {
                 this.recordInPage = value + ' bản ghi 1 trang';
                 this.recordNumber = value;
@@ -397,7 +395,7 @@ export default {
                 let currentWindow = this;
                 this.setToastMessage('Xóa thành công!', 'success', 2000);
                 try {
-                    await PositionsApi.deletePositions(currentWindow.positionContextMenuId).then(
+                    await OrganizationApi.deleteOrganization(currentWindow.organizationContextMenuId).then(
                         (res) => {
                             res;
                             this.loadDataByFilter();
@@ -413,19 +411,19 @@ export default {
             }
         }
     },
-    // Kết thúc methods position
+    // Kết thúc methods organization
     data() {
         return {
             /**
              * Biến lưu danh sách nhân viên
              */
-            positions: [],
+            organizations: [],
             /** Biến lưu id nhân viên đang được chọn để xử lý sự kiện sửa*/
-            positionSelectedId: null,
+            organizationSelectedId: null,
             /** Biến lưu id nhân viên đang được chọn để xử lý sự kiện xóa*/
-            positionContextMenuId: null,
+            organizationContextMenuId: null,
             /** Biến lưu id nhân viên khi tick vào checkbox*/
-            positionIdCheckboxSelected: null,
+            organizationIdCheckboxSelected: null,
             /** Biến lưu kết quả của input search và sử dụng v-model*/
             searchValue: null,
             /** Biến lưu kết quả của input search*/
@@ -434,7 +432,7 @@ export default {
             formMode: 0, // add là 0, edit là 1, clone là 2
             /** Biến chứa tổng bản ghi*/
             totalRecord: null,
-            /** Biến kiểu bool để show PositionsDetail*/
+            /** Biến kiểu bool để show OrganizationDetail*/
             isShowDialog: false,
             /** Biến kiểu bool để material chưa nút xóa*/
             isShowMaterial: false,
@@ -473,7 +471,7 @@ export default {
             /** Đếm số check box đã chọn trong 1 trang*/
             countCheckBoxCheckedInPage: 0,
             /** biến chưa id theo hàng*/
-            positionRowId: '',
+            organizationRowId: '',
             /** biến chứa loại delete, 0 là xóa 1, 1 là xóa nhiều */
             deleteStatus: 0,
             dataLoadImg: 'images/9317f7fa-21c7-48a8-8770-c47e25258c8d'
@@ -483,15 +481,15 @@ export default {
 </script>
 <template>
     <div class="content__header">
-        <p class="title">Chức danh</p>
-        <BaseButton :text="'Thêm mới chức danh'" @click="btnAddOnClick"> </BaseButton>
+        <p class="title">Dự án</p>
+        <BaseButton :text="'Thêm mới Dự án'" @click="btnAddOnClick"> </BaseButton>
     </div>
     <div class="content__main">
         <div class="content__main__header">
             <div class="base__relative"></div>
             <div class="flex">
                 <div class="content__search">
-                    <BaseInput v-model="searchValue" :hasIcon="true" @keyup="searchObject(searchValue)" :placeHolder="'Tìm theo mã chức danh'" :inputIcon="'icon__search'"> </BaseInput>
+                    <BaseInput v-model="searchValue" :hasIcon="true" @keyup="searchObject(searchValue)" :placeHolder="'Tìm theo mã Dự án'" :inputIcon="'icon__search'"> </BaseInput>
                 </div>
                 <div class="content__refresh border__icon32">
                     <div @click="btnRefreshOnClick" class="icon icon__refresh" tooltip-title="Lấy lại dữ liệu"></div>
@@ -503,40 +501,42 @@ export default {
         </div>
         <div class="content__table">
             <div class="table">
-                <table id="tbPositionsList">
+                <table id="tbOrganizationList">
                     <thead>
-                        <th class="w-125px">MÃ CHỨC DANH</th>
-                        <th class="w-200px">TÊN CHỨC DANH</th>
+                        <th class="w-125px">MÃ DỰ ÁN</th>
+                        <th class="w-200px">TÊN DỰ ÁN</th>
+                        <th class="w-200px">TÊN PHÒNG BAN</th>
                         <th class="w-100px table__center">CHỨC NĂNG</th>
                     </thead>
                     <tbody>
                         <!-- Dùng v-for để binding dữ liệu -->
                         <tr
-                            v-for="(emp, index) in positions"
+                            v-for="(emp, index) in organizations"
                             :key="emp"
                             :class="{
                                 table__item: true,
-                                'row--selected': toggleRowSelected(emp.PositionsId),
-                                'rows--checked': tickCheckBoxSelected(index, emp.PositionsId)
+                                'row--selected': toggleRowSelected(emp.OrganizationId),
+                                'rows--checked': tickCheckBoxSelected(index, emp.OrganizationId)
                             }"
-                            @click="selectedRow(emp.PositionsId)"
+                            @click="selectedRow(emp.OrganizationId)"
                             @dblclick="btnEditOnClick(emp)"
                         >
-                            <td class="tbPositionsCode">{{ emp.PositionsCode }}</td>
-                            <td>{{ emp.PositionsName }}</td>
+                            <td class="tbOrganizationCode">{{ emp.OrganizationCode }}</td>
+                            <td>{{ emp.OrganizationName }}</td>
+                            <td>{{ emp.DepartmentName }}</td>
                             <td class="table__center">
                                 <div class="table__combo__button flex">
                                     <div @click="btnEditOnClick(emp)">
                                         <button class="button__edit btnEdit">Sửa</button>
                                     </div>
 
-                                    <div :class="['button__material btnMaterial', emp.PositionsId == positionContextMenuId ? 'button__material__border' : '']" @click="btnContextMenuOnClick(emp.PositionsId)">
+                                    <div :class="['button__material btnMaterial', emp.OrganizationId == organizationContextMenuId ? 'button__material__border' : '']" @click="btnContextMenuOnClick(emp.OrganizationId)">
                                         <button class="icon icon__table__material button24"></button>
                                     </div>
                                 </div>
                             </td>
                             <td class="table__popup">
-                                <BaseContextMenu :class="{ isShowBlock: checkShowContextMenu(emp.PositionsId) }" :positionCode="emp.PositionsCode" :position="emp" @showWarningPopup="showWarningPopup" @btnCloneOnClick="btnCloneOnClick">
+                                <BaseContextMenu :class="{ isShowBlock: checkShowContextMenu(emp.OrganizationId) }" :organizationCode="emp.OrganizationCode" :organization="emp" @showWarningPopup="showWarningPopup" @btnCloneOnClick="btnCloneOnClick">
                                 </BaseContextMenu>
                             </td>
                         </tr>
@@ -552,7 +552,7 @@ export default {
             </p>
             <div class="footer__right flex">
                 <div class="footer__dropdown dropdown dropdown__page">
-                    <BaseInput ref="inputPositions" :isShowDropdown="isShowDropdown" :inputIcon="'icon__dropdown'" :hasIcon="true" :isReadOnly="true" @showDropdown="showRecordInPageDropdown" v-model="recordInPage">
+                    <BaseInput ref="inputOrganization" :isShowDropdown="isShowDropdown" :inputIcon="'icon__dropdown'" :hasIcon="true" :isReadOnly="true" @showDropdown="showRecordInPageDropdown" v-model="recordInPage">
                         <BaseDropdown :isShow="isShowDropdown" :dropdownKind="'dropdown__data'" :contentArray="[10, 20, 30, 50, 100]" :pageSize="recordNumber" :dropdownText="' bản ghi trên 1 trang'" @showDropdown="showRecordInPageDropdown">
                         </BaseDropdown>
                     </BaseInput>
@@ -576,11 +576,11 @@ export default {
     </div>
     <BasePopup :isShowPopup="isShowPopup" :popupText="popupNotification" :iconType="'icon__warning'" :buttonType="'button__warning'" @showPopup="showWarningPopup" @confirmDelete="confirmDelete"> </BasePopup>
     <BaseToastMessage ref="toastMesDetail" :toastContent="toastContent" :toastType="toastType" :toastDuration="toastDuration"> </BaseToastMessage>
-    <PositionsDetail
+    <OrganizationDetail
         v-if="isShowDialog"
-        :positionSelectedId="positionSelectedId"
+        :organizationSelectedId="organizationSelectedId"
         :formMode="formMode"
-        @showPositionsDetailDialog="showPositionsDetailDialog"
+        @showOrganizationDetailDialog="showOrganizationDetailDialog"
         @loadData="loadDataByFilter"
         @setDataToastMessage="setToastMessage"
         @showToast="showToastMessage"

@@ -13,6 +13,8 @@ const model = ref([
         items: [
             { label: 'DS Nhân viên', icon: 'pi pi-fw pi-user', to: '/src/components/pages/employee/employeeList' },
             { label: 'Phòng ban', icon: 'pi pi-fw pi-user', to: '/src/components/pages/department/departmentList' },
+            { label: 'Dự án', icon: 'pi pi-fw pi-user', to: '/src/components/pages/organization/organizationList' },
+            { label: 'Chức danh', icon: 'pi pi-fw pi-user', to: '/src/components/pages/positions/positionsList' },
             { label: 'Nhân viên', icon: 'pi pi-fw pi-user', to: '/uikit/employee' },
             { label: 'Form Layout', icon: 'pi pi-fw pi-id-card', to: '/uikit/formlayout' },
             { label: 'Input', icon: 'pi pi-fw pi-check-square', to: '/uikit/input' },
