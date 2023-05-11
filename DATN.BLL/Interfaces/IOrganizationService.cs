@@ -9,6 +9,6 @@ namespace DATN.BLL.Interfaces
 {
     public interface IOrganizationService : IBaseService<Organization>
     {
-
+        public object FilterService(int pageSize, int pageNumber, string? textFilter);
     }
 }

@@ -11,6 +11,42 @@ namespace DATN.DAL.Repository
 {
     public class PositionsRepository : BaseRepository<Positions>, IPositionsRepository
     {
-        
+        /// <summary>
+        /// Phương thức phân trang tìm kiếm
+        /// </summary>
+        /// <param name="pageSize">Mã nhân viên</param>
+        /// <param name="pageNumber">Mã nhân viên</param>
+        /// <param name="textFilter">Mã nhân viên</param>
+        /// <returns>
+        ///     TotalPage: Tổng số trang 
+        ///     TotalRecord: Tổng số bản ghi
+        ///     CurrentPage: Vị trí của trang hiện tại
+        ///     Data: Danh sách nhân viên phù hợp với
+        /// </returns>
+        /// Created By: NDDung (10/08/2022)
+        public Object FilterPositions(int pageSize, int pageNumber, string? textFilter)
+        {
+            var storeName = "Proc_FilterPositions";
+            var dynamicParam = new DynamicParameters();
+            dynamicParam.Add("pageSize", pageSize);
+            // thực hiện tính vị trí bắt đầu để truyền vào offset trong proc
+            var pageNumberBegin = (pageNumber - 1) * pageSize;
+            dynamicParam.Add("pageNumberBegin", pageNumberBegin);
+            dynamicParam.Add("filterText", textFilter);
+            // tìm kiếm tổng số bản ghi phù hợp với textFilter
+            var sqlCommand = $"SELECT PositionsId FROM Positions WHERE PositionsCode LIKE '%{textFilter}%' OR PositionsName LIKE '%{textFilter}%' ";
+            var TotalRecord = _connection.Query(sqlCommand).Count();
+            var TotalPage = Math.Ceiling((double)TotalRecord / pageSize);
+            var rowsEffect = _connection.Query<Positions>(sql: storeName, param: dynamicParam, commandType: System.Data.CommandType.StoredProcedure);
+            //var temp = _connection.QueryMultiple // Trả về 1 danh sách các bảng
+            var res = new
+            {
+                TotalRecord = TotalRecord,
+                TotalPage = TotalPage,
+                Data = rowsEffect,
+
+            };
+            return res;
+        }
     }
 }

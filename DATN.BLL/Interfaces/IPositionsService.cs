@@ -10,6 +10,6 @@ namespace DATN.BLL.Interfaces
 {
     public interface IPositionsService : IBaseService<Positions>
     {
-
+        public object FilterService(int pageSize, int pageNumber, string? textFilter);
     }
 }

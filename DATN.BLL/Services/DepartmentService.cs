@@ -34,7 +34,7 @@ namespace DATN.BLL.Services
         ///     Thông tin mà employeeResponsitory.filterEmployee trả về
         /// </returns>
         /// Created By: NDDung (10/08/2022)
-        public object FilterService(int pageSize, int pageNumber, string? employeeFilter)
+        public object FilterService(int pageSize, int pageNumber, string? textFilter)
         {
             if (pageSize == 0)
             {
@@ -44,11 +44,11 @@ namespace DATN.BLL.Services
             {
                 pageNumber = 1;
             }
-            if (employeeFilter == null)
+            if (textFilter == null)
             {
-                employeeFilter = "";
+                textFilter = "";
             }
-            var res = departmentRepository.FilterDepartment(pageSize, pageNumber, employeeFilter);
+            var res = departmentRepository.FilterDepartment(pageSize, pageNumber, textFilter);
             return res;
 
         }

@@ -27,7 +27,7 @@ namespace DATN.NDDUNG.API.Controllers
         /// </summary>
         /// <param name="pageSize">Số bản ghi 1 trang</param>
         /// <param name="pageNumber">Trang số mấy</param>
-        /// <param name="employeeFilter">Thông tin tìm kiếm theo</param>
+        /// <param name="textFilter">Thông tin tìm kiếm theo</param>
         /// <returns>
         ///     Mã 200 và data khi tìm thành công    
         /// </returns>

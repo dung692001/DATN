@@ -10,6 +10,6 @@ namespace DATN.BLL.Interfaces
 {
     public interface IDepartmentService : IBaseService<Department>
     {
-        public object FilterService(int pageSize, int pageNumber, string? employeeFilter);
+        public object FilterService(int pageSize, int pageNumber, string? textFilter);
     }
 }

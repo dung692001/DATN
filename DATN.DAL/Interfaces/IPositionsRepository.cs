@@ -9,5 +9,6 @@ namespace DATN.DAL.Interfaces
 {
     public interface IPositionsRepository : IBaseRepository<Positions>
     {
+        public Object FilterPositions(int pageSize, int pageNumber, string? textFilter);
     }
 }
