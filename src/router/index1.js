@@ -3,7 +3,6 @@ import jwt from 'jsonwebtoken';
 
 import store from '../store/index';
 
-import AppLayout from '@/layout/AppLayout.vue';
 import EmployeeList from '@/components/pages/employee/EmployeeList.vue';
 import DepartmentList from '@/components/pages/department/DepartmentList.vue';
 import OrganizationList from '@/components/pages/organization/OrganizationList.vue';
@@ -15,50 +14,48 @@ const routes = [
     {
         path: '/',
         name: '/',
-        redirect: '/layout'
+        redirect: '/src/components/pages/employee/employeeList'
+    },
+    {
+        path: '/',
+        name: 'Applay',
+        component: Login
     },
     {
         path: '/auth/login',
         name: 'login',
-        component: Login
+        component: AppLayout
     },
     {
-        path: '/layout',
-        component: AppLayout,
+        path: '/src/components/pages/employee/employeeList',
+        name: 'employeeList',
+        component: EmployeeList,
         beforeEnter: requireAdmin,
-        meta: { requiresAuth: true },
-        children: [
-            {
-                path: '/src/components/pages/employee/employeeList',
-                name: 'employeeList',
-                component: EmployeeList,
-                meta: { requiresAuth: true }
-            },
-            {
-                path: '/src/components/pages/department/departmentList',
-                name: 'departmentList',
-                component: DepartmentList,
-                meta: { requiresAuth: true }
-            },
-            {
-                path: '/src/components/pages/organization/organizationList',
-                name: 'organizationList',
-                component: OrganizationList,
-                meta: { requiresAuth: true }
-            },
-            {
-                path: '/src/components/pages/positions/positionsList',
-                name: 'positionsList',
-                component: PositiosList,
-                meta: { requiresAuth: true }
-            },
-            {
-                path: '/uikit/employee',
-                name: 'employee',
-                component: DemoPage,
-                meta: { requiresAuth: true }
-            }
-        ]
+        meta: { requiresAuth: true }
+    },
+    {
+        path: '/src/components/pages/department/departmentList',
+        name: 'departmentList',
+        component: DepartmentList,
+        meta: { requiresAuth: true }
+    },
+    {
+        path: '/src/components/pages/organization/organizationList',
+        name: 'organizationList',
+        component: OrganizationList,
+        meta: { requiresAuth: true }
+    },
+    {
+        path: '/src/components/pages/positions/positionsList',
+        name: 'positionsList',
+        component: PositiosList,
+        meta: { requiresAuth: true }
+    },
+    {
+        path: '/uikit/employee',
+        name: 'employee',
+        component: DemoPage,
+        meta: { requiresAuth: true }
     }
 ];
 
@@ -94,6 +91,7 @@ function isLoggedIn() {
         // Giải mã token để kiểm tra tính hợp lệ của nó
         const decodedToken = jwt.decode(token);
         store.state.role = jwt.decode(token).role;
+        store.state.cinemaName = jwt.decode(token).cinemaName;
 
         // Kiểm tra xem token có hết hạn hay không
         const expirationDate = new Date(decodedToken.exp * 1000);
@@ -118,14 +116,13 @@ function requireAdmin(to, from, next) {
     if (!isLoggedIn(token)) {
         next('/auth/login');
     } else {
-        //const decodedToken = jwt.decode(token);
-        // if (decodedToken.role !== 'admin') {
-        //     store.dispatch('showToast', 'Tài khoản không có quyền truy cập!');
-        //     next(from.path);
-        // } else {
-        //     next();
-        // }
-        next();
+        const decodedToken = jwt.decode(token);
+        if (decodedToken.role !== 'admin') {
+            store.dispatch('showToast', 'Tài khoản không có quyền truy cập!');
+            next(from.path);
+        } else {
+            next();
+        }
     }
 }
 

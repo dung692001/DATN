@@ -27,6 +27,7 @@ export default {
                             localStorage.setItem('token', res.data);
                             //router.push({ path: '/src/components/pages/employee/employeeList' });
                             router.push({ name: 'employeeList', params: {} });
+                            sessionStorage.setItem('token', res.data);
                             if (!res.data) {
                                 currentWindow.$store.state.isLoggedIn = false;
                             }
