@@ -32,31 +32,31 @@ const routes = [
                 path: '/src/components/pages/employee/employeeList',
                 name: 'employeeList',
                 component: EmployeeList,
-                meta: { requiresAuth: true }
+                meta: { requiresAuth: true, permission: 'admin' }
             },
             {
                 path: '/src/components/pages/department/departmentList',
                 name: 'departmentList',
                 component: DepartmentList,
-                meta: { requiresAuth: true }
+                meta: { requiresAuth: true, permission: 'admin' }
             },
             {
                 path: '/src/components/pages/organization/organizationList',
                 name: 'organizationList',
                 component: OrganizationList,
-                meta: { requiresAuth: true }
+                meta: { requiresAuth: true, permission: 'admin' }
             },
             {
                 path: '/src/components/pages/positions/positionsList',
                 name: 'positionsList',
                 component: PositiosList,
-                meta: { requiresAuth: true }
+                meta: { requiresAuth: true, permission: 'admin' }
             },
             {
                 path: '/uikit/employee',
                 name: 'employee',
                 component: DemoPage,
-                meta: { requiresAuth: true }
+                meta: { requiresAuth: true, permission: 'employee' }
             }
         ]
     }
@@ -77,7 +77,10 @@ router.beforeEach((to, from, next) => {
                 query: { redirect: to.fullPath }
             });
         } else {
-            next();
+            const permit = to.meta.permission;
+            if (permit && permit == store.state.role) {
+                next();
+            }
         }
     } else {
         next();
@@ -86,7 +89,7 @@ router.beforeEach((to, from, next) => {
 
 // Hàm check login với token
 function isLoggedIn() {
-    const token = sessionStorage.getItem('token');
+    const token = localStorage.getItem('token');
     store.state.isLoggedIn = true;
 
     // Kiểm tra xem token đã được lưu trong sessionStorage chưa
@@ -99,7 +102,7 @@ function isLoggedIn() {
         const expirationDate = new Date(decodedToken.exp * 1000);
         if (expirationDate <= new Date()) {
             // Nếu token đã hết hạn, xóa nó khỏi sessionStorage và trả về false
-            sessionStorage.removeItem('token');
+            localStorage.removeItem('token');
             return false;
         } else {
             // Nếu token hợp lệ, trả về true
@@ -113,7 +116,7 @@ function isLoggedIn() {
 
 // Hàm check role
 function requireAdmin(to, from, next) {
-    const token = sessionStorage.getItem('token');
+    const token = localStorage.getItem('token');
 
     if (!isLoggedIn(token)) {
         next('/auth/login');

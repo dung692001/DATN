@@ -5,6 +5,45 @@ import { useRouter } from 'vue-router';
 
 const { layoutConfig, onMenuToggle } = useLayout();
 
+const menu = ref(null);
+const overlayMenuItems = ref([
+    {
+        label: 'Save',
+        icon: 'pi pi-save',
+        command: (item) => {
+            console.log(item);
+        }
+    },
+    {
+        label: 'Update',
+        icon: 'pi pi-refresh'
+    },
+    {
+        label: 'Delete',
+        icon: 'pi pi-trash'
+    },
+    {
+        separator: true
+    },
+    {
+        label: 'Sign Out',
+        icon: 'pi pi-fw pi-sign-out',
+        command: () => {
+            if (localStorage.getItem('token')) {
+                localStorage.removeItem('token');
+            }
+            if (sessionStorage.getItem('token')) {
+                sessionStorage.removeItem('token');
+            }
+            router.push({ name: 'login', params: {} });
+        }
+    }
+]);
+
+const toggleMenu = (event) => {
+    menu.value.toggle(event);
+};
+
 const outsideClickListener = ref(null);
 const topbarMenuActive = ref(false);
 const router = useRouter();
@@ -80,7 +119,8 @@ const isOutsideClicked = (event) => {
                 <i class="pi pi-calendar"></i>
                 <span>Calendar</span>
             </button>
-            <button @click="onTopBarMenuButton()" class="p-link layout-topbar-button">
+            <button @click="toggleMenu" class="p-link layout-topbar-button">
+                <Menu ref="menu" :model="overlayMenuItems" :popup="true" />
                 <i class="pi pi-user"></i>
                 <span>Profile</span>
             </button>

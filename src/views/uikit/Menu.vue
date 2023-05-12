@@ -182,7 +182,10 @@ const tieredMenuItems = ref([
 const overlayMenuItems = ref([
     {
         label: 'Save',
-        icon: 'pi pi-save'
+        icon: 'pi pi-save',
+        command: (item) => {
+            console.log(item);
+        }
     },
     {
         label: 'Update',

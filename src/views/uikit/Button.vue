@@ -4,7 +4,10 @@ import { ref } from 'vue';
 const items = ref([
     {
         label: 'Update',
-        icon: 'pi pi-refresh'
+        icon: 'pi pi-refresh',
+        command: (item) => {
+            console.log(item);
+        }
     },
     {
         label: 'Delete',

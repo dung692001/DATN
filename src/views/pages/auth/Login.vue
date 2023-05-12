@@ -16,6 +16,7 @@ const logoUrl = computed(() => {
 <script>
 import EmployeeApi from '../../../apis/EmployeeApi.js';
 import router from '@/router/index';
+import jwt from 'jsonwebtoken';
 export default {
     methods: {
         async signInOnClick(email, password) {
@@ -25,9 +26,15 @@ export default {
                     await EmployeeApi.getUserToken(email, password).then(
                         (res) => {
                             localStorage.setItem('token', res.data);
-                            //router.push({ path: '/src/components/pages/employee/employeeList' });
-                            router.push({ name: 'employeeList', params: {} });
                             sessionStorage.setItem('token', res.data);
+                            const token = localStorage.getItem('token');
+                            this.$store.state.role = jwt.decode(token).role;
+                            this.$store.state.isLoggedIn = true;
+                            if (this.$store.state.role == 'admin') {
+                                router.push({ name: 'employeeList', params: {} });
+                            } else if (this.$store.state.role == 'employee') {
+                                router.push({ name: 'employee', params: {} });
+                            }
                             if (!res.data) {
                                 currentWindow.$store.state.isLoggedIn = false;
                             }
