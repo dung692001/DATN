@@ -36,6 +36,11 @@ const model = ref([
         label: '',
         items: [{ label: 'Hồ sơ nhân viên', icon: 'pi pi-fw pi-user', to: '/uikit/employee' }],
         role: userRole[0]
+    },
+    {
+        label: '',
+        items: [{ label: 'Hồ sơ', icon: 'pi pi-fw pi-user', to: '/src/components/pages/employee/employeeProfile' }],
+        role: userRole[1]
     }
 ]);
 </script>

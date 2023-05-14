@@ -102,8 +102,8 @@ export default {
 <style lang="scss">
 .upload-container {
     display: flex;
-    height: 120px;
-    width: 80px;
+    height: 130px;
+    width: 100px;
     align-items: center;
     justify-content: center;
     border: 2px solid;
@@ -115,8 +115,8 @@ export default {
     .upload-main {
         cursor: pointer;
         display: flex;
-        height: 120px;
-        width: 80px;
+        height: 130px;
+        width: 100px;
         align-items: center;
         justify-content: center;
         margin: unset;
@@ -125,8 +125,8 @@ export default {
         transform: scale(3);
     }
     .upload-image {
-        width: 80px;
-        height: 120px;
+        height: 130px;
+        width: 100px;
         object-fit: cover;
     }
 }

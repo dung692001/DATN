@@ -33,7 +33,14 @@ export default {
 
 <style lang="css">
 .posterLink {
-    height: 50px;
+    height: 55px;
     width: 40px;
+    text-align: center;
+    line-height: 32px;
+    border-radius: 10%;
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    color: #1f1f20;
 }
 </style>

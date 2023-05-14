@@ -10,7 +10,7 @@ import OrganizationList from '@/components/pages/organization/OrganizationList.v
 import PositiosList from '@/components/pages/positions/PositionsList.vue';
 import DemoPage from '@/views/uikit/Employee.vue';
 import Login from '@/views/pages/auth/Login.vue';
-
+import EmployeeProfile from '@/components/pages/employee/EmployeeProfile.vue';
 const routes = [
     {
         path: '/',
@@ -57,6 +57,12 @@ const routes = [
                 name: 'employee',
                 component: DemoPage,
                 meta: { requiresAuth: true, permission: 'employee' }
+            },
+            {
+                path: '/src/components/pages/employee/employeeProfile',
+                name: 'employeeProfile',
+                component: EmployeeProfile,
+                meta: { requiresAuth: true, permission: 'admin' }
             }
         ]
     }

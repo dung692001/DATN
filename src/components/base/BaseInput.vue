@@ -61,6 +61,10 @@ export default {
         hasIcon: {
             type: Boolean,
             default: false
+        },
+        isDisabled: {
+            type: Boolean,
+            default: false
         }
     },
     methods: {
@@ -153,7 +157,7 @@ export default {
                 :tabIndex="tabIndex"
                 type="text"
                 class="fieldinput"
-                :class="[{ fieldinput__paddingicon: hasIcon }]"
+                :class="{ 'fieldinput-paddingicon': hasIcon, 'hide-border': isDisabled }"
                 :value="modelValue"
                 ref="input"
                 :readonly="isReadOnly"
@@ -161,13 +165,22 @@ export default {
                 @blur="checkInput"
                 :placeholder="placeHolder"
                 :maxlength="maxLengthInput"
+                :disabled="isDisabled"
             />
             <div @click="inputIconOnClick" v-if="inputIcon" class="dropdown__icon dropdown__icon__item flex" :class="{ 'dropdown--open': isRorateIcon }">
                 <div :class="'icon ' + inputIcon"></div>
             </div>
+            <div :class="{ 'single-row': isDisabled }"></div>
         </div>
         <slot></slot>
     </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.hide-border {
+    border: none;
+}
+.single-row {
+    border: 1px solid black;
+}
+</style>

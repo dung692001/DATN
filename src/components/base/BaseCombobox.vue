@@ -339,7 +339,7 @@ export default {
             <label class="dialog__lable" for="" :title="labelTitle">{{ label }} </label><span v-if="inputRequire" class="lb__red">*</span>
         </div>
         <div class="fieldinput__content">
-            <input type="text" class="fieldinput fieldinput__paddingicon" :tabIndex="tabIndex" ref="input" @keyup="handleKeyUp" @keydown="handleKeyDown" v-model="inputText" @input="filterInput()" @focus="showCombobox(true)" @blur="checkInput" />
+            <input type="text" class="fieldinput fieldinput-paddingicon" :tabIndex="tabIndex" ref="input" @keyup="handleKeyUp" @keydown="handleKeyDown" v-model="inputText" @input="filterInput()" @focus="showCombobox(true)" @blur="checkInput" />
             <div @click="toggleCombobox()" v-if="inputIcon" class="dropdown__icon dropdown__icon__item flex">
                 <div :class="'icon ' + inputIcon"></div>
             </div>

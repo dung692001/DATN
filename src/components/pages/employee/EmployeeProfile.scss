@@ -1,0 +1,114 @@
+.employee-component {
+    height: 80vh;
+    .user-profile-header {
+        height: 80px;
+        margin-left: 20px;
+        margin-right: 30px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 12px;
+        padding: 0 16px;
+        .profile-info-header{
+            align-items: center;
+            display: flex;
+            .user-avatar{
+                width: 40px!important;
+                height: 55px!important;              
+            }
+            .user-info{
+                .header-user-name{
+                    display: flex;
+                    justify-content: center;
+                    margin-left: 16px;                   
+                    font-size: 20px;
+                    .user-name{
+                        font-weight: 700;
+                    }
+                    .user-code{
+                        margin-left: 6px;
+                        color: #65696e;
+                    }
+                }
+                .header-more-info{
+                    display: flex;
+                    font-size: 14px;
+                    font-weight: 400;
+                    margin-left: 16px;
+
+                    .dash-info{
+                        margin: 0 4px;
+                    }
+                }
+            }
+            
+        }
+        .header-custom-button{
+            width: 175px;
+            .hide-btn{
+                display: none!important;
+            }
+            .btn-when-edit {
+                display: flex;
+                justify-content: space-between;
+                .btn-deny {
+    
+                }
+                .btn-save {
+    
+                }
+                
+            }
+        }
+        
+    }
+
+    .user-profile-content {
+        height: calc(100vh - 19rem);
+        margin-left: 20px;
+        margin-right: 30px;
+        padding: 0 25px;
+        overflow: auto;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 12px;
+
+        .user-profile-sheet{
+            .user-profile-sheet-header{
+                font-size: 20px;
+                font-weight: 700;
+                padding-bottom: 30px;
+                padding-top: 10px;
+            }
+            .user-profile-sheet-content{
+                
+                .user-sheet-content-detail{
+                    padding-bottom:20px;
+                    .user-sheet-content-title{
+                        font-size: 16px;
+                        font-weight: 700;
+                        padding-bottom: 15px;
+                    }
+                    .user-profile-detai-row{
+                        display: flex;
+                        justify-content: space-between;
+                        padding-bottom: 15px;
+
+                        .user-date-content{
+                            position: relative!important;
+                            display: flex;
+                            width: 21%;
+                            padding-bottom: 12px;
+                        }
+                    }
+                }
+                
+            }
+            
+        }
+        
+    }
+}

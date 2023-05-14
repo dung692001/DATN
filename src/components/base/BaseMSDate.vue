@@ -10,6 +10,11 @@ export default {
         // Tabindex của date
         tabIndex: {
             type: Number
+        },
+
+        isDisabled: {
+            type: Boolean,
+            default: false
         }
     },
     watch: {
@@ -56,7 +61,18 @@ export default {
 
 <template>
     <div>
-        <el-date-picker ref="inputDate" type="date" format="DD/MM/YYYY" placeholder="DD/MM/YYYY" size="default" @change="setDateTime" :class="[{ 'fieldinput__date--error': hasErrorDateType }]" :tabindex="tabIndex" v-model="dateTime" />
+        <el-date-picker
+            ref="inputDate"
+            type="date"
+            format="DD/MM/YYYY"
+            placeholder="DD/MM/YYYY"
+            size="default"
+            @change="setDateTime"
+            :class="[{ 'fieldinput__date--error': hasErrorDateType }]"
+            :tabindex="tabIndex"
+            v-model="dateTime"
+            :disabled="isDisabled"
+        />
     </div>
 </template>
 
