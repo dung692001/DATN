@@ -47,7 +47,7 @@
 
   #toast {
     position: fixed;
-    z-index: 20;
+    z-index: 10000;
     top: 10px;
     right: 5px;
 }

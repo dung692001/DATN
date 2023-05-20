@@ -19,26 +19,47 @@ import router from '@/router/index';
 import jwt from 'jsonwebtoken';
 export default {
     methods: {
+        setPayloadToast(content, type, duration) {
+            this.payloadToast = {
+                toastContent: content,
+                toastType: type,
+                toastDuration: duration
+            };
+        },
+
         async signInOnClick(email, password) {
-            var currentWindow = this;
+            var me = this;
             try {
                 if (email && password) {
                     await EmployeeApi.getUserToken(email, password).then(
                         (res) => {
-                            localStorage.setItem('token', res.data);
-                            sessionStorage.setItem('token', res.data);
-                            const token = localStorage.getItem('token');
-                            this.$store.state.role = jwt.decode(token).role;
-                            this.$store.state.isLoggedIn = true;
-                            if (this.$store.state.role == 'admin') {
-                                router.push({ name: 'employeeList', params: {} });
-                            } else if (this.$store.state.role == 'employee') {
-                                router.push({ name: 'employee', params: {} });
+                            if (res.data) {
+                                localStorage.setItem('token', res.data);
+                                sessionStorage.setItem('token', res.data);
+                                const token = localStorage.getItem('token');
+                                const decodeValue = jwt.decode(token);
+                                me.$store.state.role = decodeValue.role;
+                                me.$store.state.employeeId = decodeValue.sub;
+                                me.$store.state.isLoggedIn = true;
+                                me.setPayloadToast('Đăng nhập thành công!', 'success', 2000);
+                                me.$store.dispatch('showToast', me.payloadToast);
+                                me.getEmployee(decodeValue.sub);
+                                setTimeout(() => {
+                                    if (me.$store.state.role == 'admin') {
+                                        router.push({ name: 'employeeList', params: {} });
+                                    } else if (me.$store.state.role == 'employee') {
+                                        router.push({ name: 'employee', params: {} });
+                                    }
+                                }, 500);
+
+                                if (!res.data) {
+                                    me.$store.state.isLoggedIn = false;
+                                }
+                                me.$store.state.isLoggedIn = true;
+                            } else {
+                                me.setPayloadToast('Tài khoản hoặc mật khẩu sai, vui lòng thử lại!', 'error', 2000);
+                                me.$store.dispatch('showToast', me.payloadToast);
                             }
-                            if (!res.data) {
-                                currentWindow.$store.state.isLoggedIn = false;
-                            }
-                            currentWindow.$store.state.isLoggedIn = true;
                         },
                         (err) => {
                             console.log(err);
@@ -46,9 +67,40 @@ export default {
                     );
                 }
             } catch (error) {
+                ``;
+                console.log(error);
+            }
+        },
+
+        /**
+         * Phương thức get employee từ employeeId
+         * @param employeeId: id truyền vào để lấy toàn bộ thông tin nhân viên
+         * @Author NDDung (25/07/2022)
+         */
+        async getEmployee(employeeId) {
+            let me = this;
+            try {
+                await EmployeeApi.getEmployeeById(employeeId).then(
+                    (res) => {
+                        me.$store.state.employeeInfo = {
+                            EmployeeName: res.data.EmployeeName,
+                            Avatar: res.data.Avatar,
+                            OfficeEmail: res.data.OfficeEmail
+                        };
+                    },
+                    (err) => {
+                        console.log(err);
+                    }
+                );
+            } catch (error) {
                 console.log(error);
             }
         }
+    },
+    data() {
+        return {
+            payloadToast: {}
+        };
     }
 };
 </script>
@@ -62,22 +114,22 @@ export default {
                     <div class="text-center mb-5">
                         <img src="/demo/images/login/avatar.png" alt="Image" height="50" class="mb-3" />
                         <div class="text-900 text-3xl font-medium mb-3">Welcome!</div>
-                        <span class="text-600 font-medium">Sign in to continue</span>
+                        <span class="text-600 font-medium">Đăng nhập để tiếp tục</span>
                     </div>
 
                     <div>
-                        <label for="email1" class="block text-900 text-xl font-medium mb-2">Email</label>
+                        <label for="email1" class="block text-900 text-xl font-medium mb-2">Tài Khoản</label>
                         <InputText id="email1" type="text" placeholder="Email address" class="w-full md:w-30rem mb-5" style="padding: 1rem" v-model="email" />
 
-                        <label for="password1" class="block text-900 font-medium text-xl mb-2">Password</label>
+                        <label for="password1" class="block text-900 font-medium text-xl mb-2">Mật Khẩu</label>
                         <Password id="password1" v-model="password" placeholder="Password" :toggleMask="true" class="w-full mb-3" inputClass="w-full" inputStyle="padding:1rem"></Password>
 
                         <div class="flex align-items-center justify-content-between mb-5 gap-5">
                             <div class="flex align-items-center">
                                 <Checkbox v-model="checked" id="rememberme1" binary class="mr-2"></Checkbox>
-                                <label for="rememberme1">Remember me</label>
+                                <label for="rememberme1">Lưu tài khoản</label>
                             </div>
-                            <a class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: var(--primary-color)">Forgot password?</a>
+                            <a class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: var(--primary-color)">Quên mật khẩu?</a>
                         </div>
                         <Button label="Sign In" class="w-full p-3 text-xl" @click="signInOnClick(email, password)"></Button>
                     </div>

@@ -7,15 +7,21 @@ import { genderNameEmployee } from '../../../common/Enum.js';
 export default {
     components: {},
     mounted() {
-        this.getEmployee('ace035fc-e8dd-11ed-b40b-0897988259b7');
+        this.getEmployee(this.$store.state.employeeId);
     },
     data() {
         return {
             id: '',
-            dataLoadImg: 'images/ec497542-3b26-4f66-8ed7-1383e442ed1c',
+            dataLoadImg: '',
             text: 'a',
             employee: {},
-            isDisable: true
+            isDisable: true,
+            dropdownValues: [
+                { name: 'Nam', code: 0 },
+                { name: 'Nữ', code: 1 },
+                { name: 'khác', code: 2 }
+            ],
+            genderSelected: ''
         };
     },
     methods: {
@@ -29,11 +35,24 @@ export default {
          * @Author NDDung (25/07/2022)
          */
         async getEmployee(employeeId) {
-            let currentWindow = this;
+            let me = this;
             try {
                 await EmployeeApi.getEmployeeById(employeeId).then(
                     (res) => {
-                        currentWindow.employee = res.data;
+                        me.employee = res.data;
+                        me.dataLoadImg = 'images/' + me.employee.Avatar;
+                        let genderName = '';
+                        if (me.employee.Gender == 0) {
+                            genderName = 'Nam';
+                        } else if (me.employee.Gender == 1) {
+                            genderName = 'Nữ';
+                        } else if (me.employee.Gender == 2) {
+                            genderName = 'Khác';
+                        }
+                        me.genderSelected = {
+                            name: genderName,
+                            code: me.employee.Gender
+                        };
                     },
                     (err) => {
                         console.log(err);
@@ -82,6 +101,11 @@ export default {
         changeEditStatus(status) {
             this.isDisable = !status;
         }
+    },
+    watch: {
+        genderSelected: function (value) {
+            this.employee.Gender = value.code;
+        }
     }
 };
 </script>
@@ -91,16 +115,16 @@ export default {
         <div class="user-profile-header">
             <div class="view-header-content">
                 <div class="profile-info-header">
-                    <div class="user-avatar"><BaseDownload :linkImg="dataLoadImg"> </BaseDownload></div>
+                    <div class="user-avatar"><BaseDownload :urlLink="dataLoadImg"> </BaseDownload></div>
                     <div class="user-info">
                         <div class="header-user-name">
-                            <div class="user-name">Nguyễn Dăng Dũng</div>
-                            <div class="user-code">(B1099)</div>
+                            <div class="user-name">{{ employee.EmployeeName }}</div>
+                            <div class="user-code">({{ employee.EmployeeCode }})</div>
                         </div>
                         <div class="header-more-info">
-                            <span>Lập trình viên</span>
+                            <span>{{ employee.PositionsName }}</span>
                             <span class="dash-info"> - </span>
-                            <span>Quản lý ngân sách</span>
+                            <span>{{ employee.OrganizationName }}</span>
                         </div>
                     </div>
                 </div>
@@ -133,7 +157,10 @@ export default {
                         <div class="user-profile-detai-row">
                             <BaseInput :label="'Mã nhân viên'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="employee.EmployeeCode" :isDisabled="isDisable"> </BaseInput>
                             <BaseInput :label="'Họ và Tên'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="employee.EmployeeName" :isDisabled="isDisable"> </BaseInput>
-                            <BaseInput :label="'Giới tính'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="employee.Gender" :isDisabled="isDisable"> </BaseInput>
+                            <div class="user-profile-dropdown w-21">
+                                <div class=""><label class="dialog__lable" for="">Giới tính </label></div>
+                                <Dropdown v-model="genderSelected" :options="dropdownValues" optionLabel="name" placeholder="Select" class="user-dropdown p-r-6" :disabled="isDisable" />
+                            </div>
                             <div class="user-date-content">
                                 <div class="dialog__item">
                                     <div class="bold__label dialog__label">
@@ -170,7 +197,7 @@ export default {
                             <BaseInput :label="'ĐT di động'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="employee.PhoneNumber" :isDisabled="isDisable"> </BaseInput>
                             <BaseInput :label="'Email cá nhân'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="employee.Email" :isDisabled="isDisable"> </BaseInput>
                             <BaseInput :label="'Email cơ quan'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="employee.OfficeEmail" :isDisabled="isDisable"> </BaseInput>
-                            <BaseInput :label="'Facebook'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="text" :isDisabled="isDisable"> </BaseInput>
+                            <BaseInput :label="'Facebook'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="employee.Facebook" :isDisabled="isDisable"> </BaseInput>
                         </div>
                     </div>
                     <div class="user-sheet-content-detail">
@@ -184,35 +211,35 @@ export default {
                         <div class="user-sheet-content-title">Liên hệ khẩn cấp</div>
                         <div class="user-profile-detai-row">
                             <BaseInput :label="'Họ và Tên'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="employee.ContactName" :isDisabled="isDisable"> </BaseInput>
-                            <BaseInput :label="'Quan hệ'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="text" :isDisabled="isDisable"> </BaseInput>
+                            <BaseInput :label="'Quan hệ'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="employee.ContactRelationship" :isDisabled="isDisable"> </BaseInput>
                             <BaseInput :label="'ĐT di động'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="employee.ContactNumber" :isDisabled="isDisable"> </BaseInput>
-                            <BaseInput :label="'Địa chỉ'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="text" :isDisabled="isDisable"> </BaseInput>
+                            <BaseInput :label="'Địa chỉ'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="employee.ContactAddress" :isDisabled="isDisable"> </BaseInput>
                         </div>
                     </div>
                     <div class="user-sheet-content-detail">
                         <div class="user-sheet-content-title">Thông tin công việc</div>
                         <div class="user-profile-detai-row">
                             <BaseInput :label="'Đơn vị công tác'" :inputRequire="true" :size="'w-47 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="employee.OrganizationName" :isDisabled="isDisable"> </BaseInput>
-                            <BaseInput :label="'Địa chỉ làm việc'" :inputRequire="true" :size="'w-47 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="text" :isDisabled="isDisable"> </BaseInput>
+                            <BaseInput :label="'Địa chỉ làm việc'" :inputRequire="true" :size="'w-47 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="employee.WorkAddress" :isDisabled="isDisable"> </BaseInput>
                         </div>
                         <div class="user-profile-detai-row">
                             <BaseInput :label="'Vị trí công việc'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="employee.PositionsName" :isDisabled="isDisable"> </BaseInput>
-                            <BaseInput :label="'Loại hợp đồng'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="text" :isDisabled="isDisable"> </BaseInput>
-                            <BaseInput :label="'Trạng thái lao động'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="text" :isDisabled="isDisable"> </BaseInput>
-                            <BaseInput :label="'Tính chất lao động'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="text" :isDisabled="isDisable"> </BaseInput>
+                            <BaseInput :label="'Loại hợp đồng'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="employee.ContractType" :isDisabled="isDisable"> </BaseInput>
+                            <BaseInput :label="'Trạng thái lao động'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="employee.WorkStatus" :isDisabled="isDisable"> </BaseInput>
+                            <BaseInput :label="'Tính chất lao động'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="employee.LaborNature" :isDisabled="isDisable"> </BaseInput>
                         </div>
                     </div>
                     <div class="user-sheet-content-detail">
                         <div class="user-sheet-content-title">Thông tin lương</div>
                         <div class="user-profile-detai-row">
-                            <BaseInput :label="'Lương thử việc'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="text" :isDisabled="isDisable"> </BaseInput>
-                            <BaseInput :label="'Lương thỏa thuận chính thức'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="text" :isDisabled="isDisable"> </BaseInput>
-                            <BaseInput :label="'Lương cơ bản'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="text" :isDisabled="isDisable"> </BaseInput>
-                            <BaseInput :label="'Thưởng hiệu quả'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="text" :isDisabled="isDisable"> </BaseInput>
+                            <BaseInput :label="'Lương thử việc'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="employee.ProbationarySalary" :isDisabled="isDisable"> </BaseInput>
+                            <BaseInput :label="'Lương thỏa thuận chính thức'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="employee.Salary" :isDisabled="isDisable"> </BaseInput>
+                            <BaseInput :label="'Lương cơ bản'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="employee.SalaryInsurance" :isDisabled="isDisable"> </BaseInput>
+                            <BaseInput :label="'Thưởng hiệu quả'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="employee.BonusSalary" :isDisabled="isDisable"> </BaseInput>
                         </div>
                         <div class="user-profile-detai-row">
                             <BaseInput :label="'TK ngân hàng'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="employee.BankNumber" :isDisabled="isDisable"> </BaseInput>
-                            <BaseInput :label="'Ngân hàng'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="text" :isDisabled="isDisable"> </BaseInput>
+                            <BaseInput :label="'Ngân hàng'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="employee.BankName" :isDisabled="isDisable"> </BaseInput>
                         </div>
                     </div>
                     <div class="user-sheet-content-detail">

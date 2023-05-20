@@ -1,29 +1,39 @@
 <script>
 import { ref as storageRef } from 'firebase/storage';
-
+import { uuidv4 } from '../../JS/uuid';
 import { useFirebaseStorage, useStorageFileUrl } from 'vuefire';
 
 export default {
     props: {
-        linkImg: {
+        urlLink: {
             type: String,
-
             required: true
         }
     },
 
     setup(props) {
         const storage = useFirebaseStorage();
-
-        const mountainFileRef = storageRef(storage, props.linkImg);
+        var linkImg = props.urlLink ? props.urlLink : 'images/' + uuidv4();
+        const mountainFileRef = storageRef(storage, linkImg);
 
         const { url } = useStorageFileUrl(mountainFileRef);
 
         console.log(url);
 
         return {
-            url
+            storage,
+            url,
+            linkImg,
+            mountainFileRef
         };
+    },
+
+    watch: {
+        urlLink(newVal) {
+            this.linkImg = newVal;
+            this.mountainFileRef = storageRef(this.storage, this.linkImg);
+            this.url = useStorageFileUrl(this.mountainFileRef).url;
+        }
     }
 };
 </script>

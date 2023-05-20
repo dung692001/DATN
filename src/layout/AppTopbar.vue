@@ -8,10 +8,10 @@ const { layoutConfig, onMenuToggle } = useLayout();
 const menu = ref(null);
 const overlayMenuItems = ref([
     {
-        label: 'Save',
-        icon: 'pi pi-save',
-        command: (item) => {
-            console.log(item);
+        label: 'ChangePassword',
+        icon: 'pi pi-refresh',
+        command: () => {
+            router.push({ name: 'changPassword', params: {} });
         }
     },
     {
@@ -26,7 +26,7 @@ const overlayMenuItems = ref([
         separator: true
     },
     {
-        label: 'Sign Out',
+        label: 'Log Out',
         icon: 'pi pi-fw pi-sign-out',
         command: () => {
             if (localStorage.getItem('token')) {

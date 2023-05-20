@@ -1,5 +1,5 @@
 <script>
-import { toast } from '../../JS/toastMes.js';
+import { toast } from '../../JS/toastMes';
 export default {
     props: {
         // nội dung của toast message

@@ -736,7 +736,7 @@ export default {
                                 </BaseCheckBox>
                             </td>
                             <td>
-                                <BaseDownload :linkImg="formatAvatar(emp.Avatar)"> </BaseDownload>
+                                <BaseDownload :urlLink="formatAvatar(emp.Avatar)"> </BaseDownload>
                             </td>
                             <td class="tbEmployeeCode">{{ emp.EmployeeCode }}</td>
                             <td>{{ emp.EmployeeName }}</td>

@@ -761,6 +761,12 @@ export default {
                                 >
                                 </BaseInput>
                             </div>
+                            <div class="dialog__row">
+                                <BaseInput tabIndex="16" :label="'Địa chỉ làm việc'" :size="'p-r-6'" @setToastMessage="setToastMessage" @showToastMessage="showToastMessage" :maxLengthInput="100" v-model="employee.WorkAddress"> </BaseInput>
+                            </div>
+                            <div class="dialog__row">
+                                <BaseInput tabIndex="17" :label="'Địa chỉ'" :maxLengthInput="255" v-model="employee.Address"> </BaseInput>
+                            </div>
                         </div>
                         <div class="dialog__content__right">
                             <div class="dialog__2row">
@@ -820,23 +826,50 @@ export default {
                                 <BaseInput tabIndex="16" :label="'Email'" :size="'p-r-6'" :inputRequireValidate="true" @setToastMessage="setToastMessage" @showToastMessage="showToastMessage" :maxLengthInput="100" v-model="employee.Email">
                                 </BaseInput>
                             </div>
+                            <div class="dialog__row">
+                                <BaseInput tabIndex="16" :label="'Facebook'" :size="'p-r-6'" :inputRequireValidate="true" @setToastMessage="setToastMessage" @showToastMessage="showToastMessage" :maxLengthInput="100" v-model="employee.Facebook">
+                                </BaseInput>
+                            </div>
+                            <div class="dialog__row">
+                                <BaseInput tabIndex="18" :label="'Địa chỉ thường trú'" :maxLengthInput="255" v-model="employee.CurrentAddress"> </BaseInput>
+                            </div>
                         </div>
                     </div>
                     <div class="dialog__content__down">
                         <div class="dialog__row">
-                            <BaseInput tabIndex="17" :label="'Địa chỉ'" :maxLengthInput="255" v-model="employee.Address"> </BaseInput>
-                        </div>
+                            <BaseInput tabIndex="18" :label="'Người liên hệ khẩn cấp'" :size="'w-25 p-r-6'" :maxLengthInput="250" v-model="employee.ContactName"> </BaseInput>
 
-                        <div class="dialog__row">
-                            <BaseInput tabIndex="18" :label="'Địa chỉ thường trú'" :maxLengthInput="255" v-model="employee.CurrentAddress"> </BaseInput>
+                            <BaseInput tabIndex="19" :label="'Số điện thoại liên lạc khẩn cấp'" :size="'w-25 p-r-6'" :maxLengthInput="250" v-model="employee.ContactNumber"> </BaseInput>
+
+                            <BaseInput tabIndex="18" :label="'Quan hệ'" :size="'w-25 p-r-6'" :maxLengthInput="250" v-model="employee.ContactRelationship"> </BaseInput>
+
+                            <BaseInput tabIndex="19" :label="'Địa chỉ liên lạc khẩn cấp'" :size="'w-25 p-r-6'" :maxLengthInput="250" v-model="employee.ContactAddress"> </BaseInput>
                         </div>
 
                         <div class="dialog__row">
                             <BaseInput tabIndex="19" :label="'Số tài khoản ngân hàng (ACB)'" :size="'w-25 p-r-6'" :maxLengthInput="25" v-model="employee.BankNumber"> </BaseInput>
 
-                            <BaseInput tabIndex="18" :label="'Người liên hệ khẩn cấp'" :size="'w-25 p-r-6'" :maxLengthInput="250" v-model="employee.ContactName"> </BaseInput>
+                            <BaseInput tabIndex="18" :label="'Tên ngân hàng'" :size="'w-25 p-r-6'" :maxLengthInput="250" v-model="employee.BankName"> </BaseInput>
 
-                            <BaseInput tabIndex="19" :label="'Số điện thoại liên lạc khẩn cấp'" :size="'w-25 p-r-6'" :maxLengthInput="250" v-model="employee.ContactNumber"> </BaseInput>
+                            <BaseInput tabIndex="19" :label="'Mã BHXH'" :size="'w-25 p-r-6'" :maxLengthInput="250" v-model="employee.InsuranceNumber"> </BaseInput>
+                        </div>
+
+                        <div class="dialog__row">
+                            <BaseInput tabIndex="19" :label="'Trạng thái lao động'" :size="'w-25 p-r-6'" :maxLengthInput="25" v-model="employee.WorkStatus"> </BaseInput>
+
+                            <BaseInput tabIndex="18" :label="'Tính chất lao động'" :size="'w-25 p-r-6'" :maxLengthInput="250" v-model="employee.LaborNature"> </BaseInput>
+
+                            <BaseInput tabIndex="19" :label="'Loại hợp đồng'" :size="'w-25 p-r-6'" :maxLengthInput="250" v-model="employee.ContractType"> </BaseInput>
+                        </div>
+
+                        <div class="dialog__row">
+                            <BaseInput tabIndex="19" :label="'Lương thử việc'" :size="'w-25 p-r-6'" :maxLengthInput="25" v-model="employee.ProbationarySalary"> </BaseInput>
+
+                            <BaseInput tabIndex="18" :label="'Lương chính thức'" :size="'w-25 p-r-6'" :maxLengthInput="250" v-model="employee.Salary"> </BaseInput>
+
+                            <BaseInput tabIndex="19" :label="'Lương cơ bản'" :size="'w-25 p-r-6'" :maxLengthInput="250" v-model="employee.SalaryInsurance"> </BaseInput>
+
+                            <BaseInput tabIndex="19" :label="'Thưởng hiệu quả'" :size="'w-25 p-r-6'" :maxLengthInput="250" v-model="employee.BonusSalary"> </BaseInput>
                         </div>
                     </div>
                 </div>

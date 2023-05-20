@@ -96,5 +96,9 @@ class EmployeeAPI {
     async exportEmployee() {
         return await window.open('https://localhost:7152/api/v1/Employees/Export', 'Download');
     }
+
+    async changePassword(employeeId, password, newPassword) {
+        return await BaseAPIConfig.put(`${this.controller}/changePassword/${employeeId}?oldPassword=${password}&newPassword=${newPassword}`);
+    }
 }
 export default new EmployeeAPI();

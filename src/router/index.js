@@ -10,6 +10,7 @@ import OrganizationList from '@/components/pages/organization/OrganizationList.v
 import PositiosList from '@/components/pages/positions/PositionsList.vue';
 import DemoPage from '@/views/uikit/Employee.vue';
 import Login from '@/views/pages/auth/Login.vue';
+import ChangePassword from '@/views/pages/auth/ChangePassword.vue';
 import EmployeeProfile from '@/components/pages/employee/EmployeeProfile.vue';
 const routes = [
     {
@@ -21,6 +22,12 @@ const routes = [
         path: '/auth/login',
         name: 'login',
         component: Login
+    },
+    {
+        path: '/auth/changePassword',
+        name: 'changPassword',
+        component: ChangePassword,
+        meta: { requiresAuth: true, permission: 'admin, employee' }
     },
     {
         path: '/layout',
@@ -84,7 +91,7 @@ router.beforeEach((to, from, next) => {
             });
         } else {
             const permit = to.meta.permission;
-            if (permit && permit == store.state.role) {
+            if (permit && permit.indexOf(store.state.role) >= 0) {
                 next();
             }
         }
