@@ -99,6 +99,54 @@ const isOutsideClicked = (event) => {
 };
 </script>
 
+<script>
+import EmployeeApi from '@/apis/EmployeeApi';
+export default {
+    mounted() {
+        this.dataLoadImg = '';
+        this.getEmployee(this.$store.state.employeeId);
+    },
+
+    methods: {
+        /**
+         * Phương thức get employee từ employeeId
+         * @param employeeId: id truyền vào để lấy toàn bộ thông tin nhân viên
+         * @Author NDDung (25/07/2022)
+         */
+        async getEmployee(employeeId) {
+            let me = this;
+            try {
+                await EmployeeApi.getEmployeeById(employeeId).then(
+                    (res) => {
+                        me.$store.state.employeeInfo = {
+                            EmployeeName: res.data.EmployeeName,
+                            Avatar: res.data.Avatar,
+                            OfficeEmail: res.data.OfficeEmail
+                        };
+                        this.dataLoadImg = 'images/' + this.$store.state.employeeInfo.Avatar;
+                        this.EmployeeName = this.$store.state.employeeInfo.EmployeeName;
+                        this.UserName = this.$store.state.employeeInfo.OfficeEmail;
+                    },
+                    (err) => {
+                        console.log(err);
+                    }
+                );
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    },
+
+    data() {
+        return {
+            dataLoadImg: '',
+            EmployeeName: '',
+            UserName: ''
+        };
+    }
+};
+</script>
+
 <template>
     <div class="layout-topbar">
         <router-link to="/" class="layout-topbar-logo">
@@ -120,7 +168,17 @@ const isOutsideClicked = (event) => {
                 <span>Calendar</span>
             </button>
             <button @click="toggleMenu" class="p-link layout-topbar-button">
-                <Menu ref="menu" :model="overlayMenuItems" :popup="true" />
+                <Menu ref="menu" :model="overlayMenuItems" :popup="true" :class="'infor-menu-width'">
+                    <template #start>
+                        <button @click="profileClick" class="w-full p-link flex align-items-center p-2 pl-3 text-color hover:surface-200 border-noround flex-cutstom">
+                            <BaseDownload :urlLink="dataLoadImg"> </BaseDownload>
+                            <div class="flex flex-column align style-custom">
+                                <span class="font-bold">{{ EmployeeName }}</span>
+                                <span class="text-sm">{{ UserName }}</span>
+                            </div>
+                        </button>
+                    </template>
+                </Menu>
                 <i class="pi pi-user"></i>
                 <span>Profile</span>
             </button>
@@ -132,4 +190,15 @@ const isOutsideClicked = (event) => {
     </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+.infor-menu-width {
+    width: 250px !important;
+    .flex-cutstom {
+        display: flex;
+        flex-direction: column !important;
+    }
+    .style-custom {
+        padding: 10px;
+    }
+}
+</style>

@@ -111,7 +111,9 @@
                         }
                     }
                 }
-                
+                .hide-when-edit {
+                    display: none !important;
+                }
             }
             
         }

@@ -12,6 +12,7 @@ import DemoPage from '@/views/uikit/Employee.vue';
 import Login from '@/views/pages/auth/Login.vue';
 import ChangePassword from '@/views/pages/auth/ChangePassword.vue';
 import EmployeeProfile from '@/components/pages/employee/EmployeeProfile.vue';
+import AttendanceStatist from '@/components/pages/attendance/AttendanceStatist.vue';
 const routes = [
     {
         path: '/',
@@ -69,7 +70,13 @@ const routes = [
                 path: '/src/components/pages/employee/employeeProfile',
                 name: 'employeeProfile',
                 component: EmployeeProfile,
-                meta: { requiresAuth: true, permission: 'admin' }
+                meta: { requiresAuth: true, permission: 'admin, employee' }
+            },
+            {
+                path: '/src/components/pages/attendance/attendanceStatist',
+                name: 'attendanceStatist',
+                component: AttendanceStatist,
+                meta: { requiresAuth: true, permission: 'admin, employee' }
             }
         ]
     }

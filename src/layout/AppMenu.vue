@@ -41,6 +41,11 @@ const model = ref([
         label: '',
         items: [{ label: 'Hồ sơ', icon: 'pi pi-fw pi-user', to: '/src/components/pages/employee/employeeProfile' }],
         role: userRole[1]
+    },
+    {
+        label: '',
+        items: [{ label: 'Đơn xin nghỉ', icon: 'pi pi-fw pi-user', to: '/src/components/pages/attendance/attendanceStatist' }],
+        role: userRole[1]
     }
 ]);
 </script>

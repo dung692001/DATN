@@ -54,7 +54,6 @@ export default {
     <div class="dropdown__data-table">
         <div class="dropdown__item-table" @click="btnCloneOnClick()">Nhân bản</div>
         <div class="dropdown__item-table btnDelete" @click="btnDeleteOnClick">Xóa</div>
-        <div class="dropdown__item-table">Sử dụng</div>
     </div>
 </template>
 

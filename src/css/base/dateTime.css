@@ -16,7 +16,7 @@
 }
 
 .el-input__prefix-inner {
-    background-image: url(http://localhost:8080/img/Sprites.64af8f61.2ff7618a.svg) !important;
+    background-image: url(http://127.0.0.1:5173/src/assets/imgs/Sprites.64af8f61.svg) !important;
     background: no-repeat -128px -312px;
     width: 16px;
     height: 16px;

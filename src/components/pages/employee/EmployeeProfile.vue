@@ -15,16 +15,29 @@ export default {
             dataLoadImg: '',
             text: 'a',
             employee: {},
+            employeeBeforeEdit: {},
             isDisable: true,
             dropdownValues: [
                 { name: 'Nam', code: 0 },
                 { name: 'Nữ', code: 1 },
                 { name: 'khác', code: 2 }
             ],
-            genderSelected: ''
+            genderSelected: '',
+            employeeCode: '',
+            employeeName: '',
+            positionsName: '',
+            organizationName: ''
         };
     },
     methods: {
+        setPayloadToast(content, type, duration) {
+            this.payloadToast = {
+                toastContent: content,
+                toastType: type,
+                toastDuration: duration
+            };
+        },
+
         getImgId(value) {
             this.id = value;
         },
@@ -53,6 +66,10 @@ export default {
                             name: genderName,
                             code: me.employee.Gender
                         };
+                        me.employeeCode = me.employee.EmployeeCode;
+                        me.employeeName = me.employee.EmployeeName;
+                        me.positionsName = me.employee.PositionsName;
+                        me.organizationName = me.employee.OrganizationName;
                     },
                     (err) => {
                         console.log(err);
@@ -99,7 +116,70 @@ export default {
         },
 
         changeEditStatus(status) {
-            this.isDisable = !status;
+            if (status == true) {
+                this.employeeBeforeEdit = JSON.parse(JSON.stringify(this.employee));
+                this.isDisable = !status;
+            } else {
+                this.isDisable = !status;
+            }
+        },
+
+        denySaveOnClick() {
+            this.isDisable = true;
+            this.employee = JSON.parse(JSON.stringify(this.employeeBeforeEdit));
+        },
+
+        btnSaveOnClick() {
+            try {
+                let me = this;
+
+                // format lại DateOfBirth và IdentityDate
+                me.employee.DateOfBirth = me.formatDate(me.employee.DateOfBirth);
+                me.employee.IdentifyIssuedDate = me.formatDate(me.employee.IdentifyIssuedDate);
+                // Thực hiên sửa nhân viên
+                EmployeeApi.saveEmployeeByEdit(me.$store.state.employeeId, me.employee).then(
+                    () => {
+                        // Nếu sửa thành công hiện thị toast msg thông báo thành công:
+                        me.setPayloadToast('Sửa thông tin thành công!', 'success', 2000);
+                        me.$store.dispatch('showToast', me.payloadToast);
+                        me.changeEditStatus(me.isDisable);
+                    },
+                    (err) => {
+                        me.setPayloadToast('Sửa thất bại!', 'error', 2000);
+                        me.$store.dispatch('showToast', me.payloadToast);
+                        console.log(err);
+                    }
+                );
+            } catch (error) {
+                console.log(error);
+            }
+        },
+
+        /**
+         * Phương thức format date để cất dữ liệu
+         * @param date Ngày tháng truyền vào
+         * @return Định dạng năm tháng ngày
+         * @Author NDDung (27/07/2022)
+         */
+        formatDate(date) {
+            try {
+                if (date) {
+                    date = new Date(date);
+                    let newDate = date.getDate();
+                    let month = date.getMonth() + 1;
+                    let year = date.getFullYear();
+                    if (month <= 9) {
+                        month = '0' + month;
+                    }
+                    if (newDate <= 9) {
+                        newDate = '0' + newDate;
+                    }
+                    return `${year}/${month}/${newDate}`;
+                }
+            } catch (error) {
+                console.log(error);
+                return '';
+            }
         }
     },
     watch: {
@@ -118,13 +198,13 @@ export default {
                     <div class="user-avatar"><BaseDownload :urlLink="dataLoadImg"> </BaseDownload></div>
                     <div class="user-info">
                         <div class="header-user-name">
-                            <div class="user-name">{{ employee.EmployeeName }}</div>
-                            <div class="user-code">({{ employee.EmployeeCode }})</div>
+                            <div class="user-name">{{ employeeName }}</div>
+                            <div class="user-code">({{ employeeCode }})</div>
                         </div>
                         <div class="header-more-info">
-                            <span>{{ employee.PositionsName }}</span>
+                            <span>{{ positionsName }}</span>
                             <span class="dash-info"> - </span>
-                            <span>{{ employee.OrganizationName }}</span>
+                            <span>{{ organizationName }}</span>
                         </div>
                     </div>
                 </div>
@@ -140,10 +220,10 @@ export default {
 
                 <div class="btn-when-edit">
                     <div class="btn-deny" :class="{ 'hide-btn': isDisable }">
-                        <BaseButton :text="'Hủy'" :type="'button__outline button__outline__dialog'" @click="changeEditStatus(isDisable)"> </BaseButton>
+                        <BaseButton :text="'Hủy'" :type="'button__outline button__outline__dialog'" @click="denySaveOnClick()"> </BaseButton>
                     </div>
                     <div class="btn-save">
-                        <BaseButton tooltip-content="Lưu" :text="'Lưu'" :type="'button__dialog tooltip-title-dialog'" @click="changeEditStatus(isDisable)" :class="{ 'hide-btn': isDisable }"> </BaseButton>
+                        <BaseButton tooltip-content="Lưu" :text="'Lưu'" :type="'button__dialog tooltip-title-dialog'" @click="btnSaveOnClick()" :class="{ 'hide-btn': isDisable }"> </BaseButton>
                     </div>
                 </div>
             </div>
@@ -216,7 +296,7 @@ export default {
                             <BaseInput :label="'Địa chỉ'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="employee.ContactAddress" :isDisabled="isDisable"> </BaseInput>
                         </div>
                     </div>
-                    <div class="user-sheet-content-detail">
+                    <div class="user-sheet-content-detail" :class="[{ 'hide-when-edit': !isDisable }]">
                         <div class="user-sheet-content-title">Thông tin công việc</div>
                         <div class="user-profile-detai-row">
                             <BaseInput :label="'Đơn vị công tác'" :inputRequire="true" :size="'w-47 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="employee.OrganizationName" :isDisabled="isDisable"> </BaseInput>
@@ -229,7 +309,7 @@ export default {
                             <BaseInput :label="'Tính chất lao động'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="employee.LaborNature" :isDisabled="isDisable"> </BaseInput>
                         </div>
                     </div>
-                    <div class="user-sheet-content-detail">
+                    <div class="user-sheet-content-detail" :class="[{ 'hide-when-edit': !isDisable }]">
                         <div class="user-sheet-content-title">Thông tin lương</div>
                         <div class="user-profile-detai-row">
                             <BaseInput :label="'Lương thử việc'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="employee.ProbationarySalary" :isDisabled="isDisable"> </BaseInput>
@@ -242,13 +322,13 @@ export default {
                             <BaseInput :label="'Ngân hàng'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="employee.BankName" :isDisabled="isDisable"> </BaseInput>
                         </div>
                     </div>
-                    <div class="user-sheet-content-detail">
+                    <div class="user-sheet-content-detail" :class="[{ 'hide-when-edit': !isDisable }]">
                         <div class="user-sheet-content-title">Thông tin bảo hiểm</div>
                         <div class="user-profile-detai-row">
                             <BaseInput :label="'Mã số BHXH'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="text" :isDisabled="isDisable"> </BaseInput>
                         </div>
                     </div>
-                    <div class="user-sheet-content-detail">
+                    <div class="user-sheet-content-detail" :class="[{ 'hide-when-edit': !isDisable }]">
                         <div class="user-sheet-content-title">Thông tin thuế</div>
                         <div class="user-profile-detai-row">
                             <BaseInput :label="'Mã số thuế'" :inputRequire="true" :size="'w-21 p-r-6'" :maxLengthInput="20" :hasTooltip="true" v-model="employee.TaxCode" :isDisabled="isDisable"> </BaseInput>

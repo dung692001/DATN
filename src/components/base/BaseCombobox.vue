@@ -345,24 +345,28 @@ export default {
             </div>
         </div>
         <div class="dialog__dropdown__data" :class="{ isShowBlock: isShowData }">
-            <div v-if="dropdownTitleLeft || dropdownTitleRight" class="dropdown__item combobox__data--row dropdown__header">
-                <div class="combobox__data--col1">{{ dropdownTitleLeft }}</div>
-                <div class="combobox__data--col2">{{ dropdownTitleRight }}</div>
-            </div>
-            <div
-                v-for="(item, index) in dataTemp"
-                :key="index"
-                @click="dropdownItemOnClick(index, item)"
-                @mousemove="selectingData(item)"
-                @mouseout="unSelectingData()"
-                class="dropdown__item combobox__data--row"
-                :class="{ 'combobox__data--selected': checkIndexSelected(index) }"
-            >
-                <div class="combobox__data--col1">
-                    {{ item[this.codeData] }}
+            <div class="dropdown-title">
+                <div v-if="dropdownTitleLeft || dropdownTitleRight" class="dropdown__item combobox__data--row dropdown__header">
+                    <div class="combobox__data--col1">{{ dropdownTitleLeft }}</div>
+                    <div class="combobox__data--col2">{{ dropdownTitleRight }}</div>
                 </div>
-                <div class="combobox__data--col2">
-                    {{ item[this.nameData] }}
+            </div>
+            <div class="dropdown-content">
+                <div
+                    v-for="(item, index) in dataTemp"
+                    :key="index"
+                    @click="dropdownItemOnClick(index, item)"
+                    @mousemove="selectingData(item)"
+                    @mouseout="unSelectingData()"
+                    class="dropdown__item combobox__data--row"
+                    :class="{ 'combobox__data--selected': checkIndexSelected(index) }"
+                >
+                    <div class="combobox__data--col1">
+                        {{ item[this.codeData] }}
+                    </div>
+                    <div class="combobox__data--col2">
+                        {{ item[this.nameData] }}
+                    </div>
                 </div>
             </div>
         </div>

@@ -228,3 +228,8 @@
     width: 600px;
     min-width: 600px;
 }
+
+.dropdown-content {
+    max-height: 175px;
+    overflow: auto;
+}
